@@ -31,14 +31,9 @@ const STATUS_STYLES: Record<StreakStatus, { bg: string; text: string; flame: str
 export function StreakWidget({
   days,
   status = days > 0 ? "active" : "lost",
-  next_milestone_days,
   className,
 }: StreakWidgetProps) {
   const styles = STATUS_STYLES[status];
-  const _progress = next_milestone_days
-    ? Math.min((days / next_milestone_days) * 100, 100)
-    : 0;
-
   return (
     <Link
       to="/myspace/streaks"
