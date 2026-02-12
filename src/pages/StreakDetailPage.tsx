@@ -142,7 +142,7 @@ export function StreakDetailPage() {
         {/* Recovery card (if applicable) */}
         <StreakRecoveryCard
           recovery={streak.recovery}
-          on_recover={() => recover_mutation.mutateAsync()}
+          on_recover={() => { recover_mutation.mutateAsync(); }}
           is_loading={recover_mutation.isPending}
         />
 

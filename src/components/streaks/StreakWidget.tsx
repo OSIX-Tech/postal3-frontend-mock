@@ -35,7 +35,7 @@ export function StreakWidget({
   className,
 }: StreakWidgetProps) {
   const styles = STATUS_STYLES[status];
-  const progress = next_milestone_days
+  const _progress = next_milestone_days
     ? Math.min((days / next_milestone_days) * 100, 100)
     : 0;
 
