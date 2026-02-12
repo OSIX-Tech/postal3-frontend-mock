@@ -1,5 +1,3 @@
-import { api_client } from "@/lib/api-client";
-import { env } from "@/config/env";
 import type {
   MyProfile,
   UserProfile,
@@ -299,102 +297,7 @@ const mock_profile_service = {
 };
 
 // ============================================
-// REAL SERVICE
-// ============================================
-
-const real_profile_service = {
-  async get_my_profile(): Promise<MyProfile> {
-    const response = await api_client.get<MyProfile>("/profile/me");
-    return response.data;
-  },
-
-  async update_profile(data: UpdateProfileRequest): Promise<MyProfile> {
-    const response = await api_client.patch<MyProfile>("/profile/me", data);
-    return response.data;
-  },
-
-  async update_settings(data: UpdateSettingsRequest): Promise<ProfileSettings> {
-    const response = await api_client.patch<ProfileSettings>(
-      "/profile/me/settings",
-      data
-    );
-    return response.data;
-  },
-
-  async upload_avatar(file: File): Promise<{ avatar_url: string }> {
-    const form_data = new FormData();
-    form_data.append("avatar", file);
-    const response = await api_client.post<{ avatar_url: string }>(
-      "/profile/me/avatar",
-      form_data,
-      { headers: { "Content-Type": "multipart/form-data" } }
-    );
-    return response.data;
-  },
-
-  async get_user_profile(user_id: string): Promise<UserProfile> {
-    const response = await api_client.get<UserProfile>(
-      `/profile/users/${user_id}`
-    );
-    return response.data;
-  },
-
-  async get_blocked_users(): Promise<BlockedUser[]> {
-    const response = await api_client.get<BlockedUser[]>(
-      "/profile/me/blocked-users"
-    );
-    return response.data;
-  },
-
-  async block_user(user_id: string): Promise<void> {
-    await api_client.post(`/profile/me/blocked-users/${user_id}`);
-  },
-
-  async unblock_user(user_id: string): Promise<void> {
-    await api_client.delete(`/profile/me/blocked-users/${user_id}`);
-  },
-
-  async send_friend_request(user_id: string): Promise<void> {
-    await api_client.post(`/profile/friends/request/${user_id}`);
-  },
-
-  async accept_friend_request(user_id: string): Promise<void> {
-    await api_client.post(`/profile/friends/accept/${user_id}`);
-  },
-
-  async get_available_oposiciones(): Promise<Oposicion[]> {
-    const response = await api_client.get<Oposicion[]>("/oposiciones");
-    return response.data;
-  },
-
-  async set_active_oposicion(oposicion_id: string): Promise<MyProfile> {
-    const response = await api_client.patch<MyProfile>(
-      "/profile/me/active-oposicion",
-      { oposicion_id }
-    );
-    return response.data;
-  },
-
-  async add_oposicion(oposicion_id: string): Promise<MyProfile> {
-    const response = await api_client.post<MyProfile>(
-      "/profile/me/oposiciones",
-      { oposicion_id }
-    );
-    return response.data;
-  },
-
-  async remove_oposicion(oposicion_id: string): Promise<MyProfile> {
-    const response = await api_client.delete<MyProfile>(
-      `/profile/me/oposiciones/${oposicion_id}`
-    );
-    return response.data;
-  },
-};
-
-// ============================================
 // EXPORT
 // ============================================
 
-export const profile_service = env.IS_DEV
-  ? mock_profile_service
-  : real_profile_service;
+export const profile_service = mock_profile_service;

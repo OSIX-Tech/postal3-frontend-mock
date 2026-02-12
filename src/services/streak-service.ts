@@ -1,5 +1,3 @@
-import { api_client } from "@/lib/api-client";
-import { env } from "@/config/env";
 import type {
   StreakDetail,
   ActivityDay,
@@ -166,25 +164,7 @@ const mock_streak_service = {
 };
 
 // ============================================
-// REAL SERVICE
-// ============================================
-
-const real_streak_service = {
-  async get_streak_detail(): Promise<StreakDetail> {
-    const response = await api_client.get<StreakDetail>("/streaks/me");
-    return response.data;
-  },
-
-  async recover_streak(): Promise<StreakDetail> {
-    const response = await api_client.post<StreakDetail>("/streaks/me/recover");
-    return response.data;
-  },
-};
-
-// ============================================
 // EXPORT
 // ============================================
 
-export const streak_service = env.IS_DEV
-  ? mock_streak_service
-  : real_streak_service;
+export const streak_service = mock_streak_service;

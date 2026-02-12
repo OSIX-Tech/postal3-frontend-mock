@@ -1,6 +1,3 @@
-import { api_client } from "@/lib/api-client";
-import { env } from "@/config/env";
-
 export interface User {
   id: string;
   email: string;
@@ -92,38 +89,4 @@ const mock_auth_service = {
   },
 };
 
-const real_auth_service = {
-  async login(data: LoginRequest): Promise<AuthResponse> {
-    const response = await api_client.post<AuthResponse>("/auth/login", data);
-    return response.data;
-  },
-
-  async register(data: RegisterRequest): Promise<AuthResponse> {
-    const response = await api_client.post<AuthResponse>("/auth/register", data);
-    return response.data;
-  },
-
-  async logout(): Promise<void> {
-    await api_client.post("/auth/logout");
-  },
-
-  async forgot_password(email: string): Promise<void> {
-    await api_client.post("/auth/forgot-password", { email });
-  },
-
-  async reset_password(data: ResetPasswordRequest): Promise<void> {
-    await api_client.post("/auth/reset-password", data);
-  },
-
-  async get_current_user(): Promise<User> {
-    const response = await api_client.get<User>("/auth/me");
-    return response.data;
-  },
-
-  async refresh_token(): Promise<AuthResponse> {
-    const response = await api_client.post<AuthResponse>("/auth/refresh");
-    return response.data;
-  },
-};
-
-export const auth_service = env.IS_DEV ? mock_auth_service : real_auth_service;
+export const auth_service = mock_auth_service;

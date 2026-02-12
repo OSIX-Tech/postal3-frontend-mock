@@ -1,5 +1,3 @@
-import { api_client } from "@/lib/api-client";
-import { env } from "@/config/env";
 import type {
   AppNotification,
   NotificationListResponse,
@@ -141,47 +139,7 @@ const mock_notification_service = {
 };
 
 // ============================================
-// REAL SERVICE
-// ============================================
-
-const real_notification_service = {
-  async list_notifications(): Promise<NotificationListResponse> {
-    const response = await api_client.get<NotificationListResponse>(
-      "/notifications"
-    );
-    return response.data;
-  },
-
-  async mark_as_read(notification_id: string): Promise<void> {
-    await api_client.patch(`/notifications/${notification_id}/read`);
-  },
-
-  async mark_all_as_read(): Promise<void> {
-    await api_client.patch("/notifications/read-all");
-  },
-
-  async get_settings(): Promise<NotificationSettings> {
-    const response = await api_client.get<NotificationSettings>(
-      "/notifications/settings"
-    );
-    return response.data;
-  },
-
-  async update_settings(
-    data: Partial<NotificationSettings>
-  ): Promise<NotificationSettings> {
-    const response = await api_client.patch<NotificationSettings>(
-      "/notifications/settings",
-      data
-    );
-    return response.data;
-  },
-};
-
-// ============================================
 // EXPORT
 // ============================================
 
-export const notification_service = env.IS_DEV
-  ? mock_notification_service
-  : real_notification_service;
+export const notification_service = mock_notification_service;

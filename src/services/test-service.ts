@@ -1,5 +1,3 @@
-import { api_client } from "@/lib/api-client";
-import { env } from "@/config/env";
 import type {
   Test,
   TestAttempt,
@@ -446,79 +444,7 @@ const mock_test_service = {
 };
 
 // ============================================
-// REAL SERVICE
-// ============================================
-
-const real_test_service = {
-  async list_tests(
-    filters?: TestFilters,
-    page = 1,
-    per_page = 12
-  ): Promise<PaginatedResponse<Test>> {
-    const params = new URLSearchParams();
-    params.set("page", String(page));
-    params.set("per_page", String(per_page));
-
-    if (filters?.search) params.set("search", filters.search);
-    if (filters?.status && filters.status !== "all")
-      params.set("status", filters.status);
-    if (filters?.kind_id) params.set("kind_id", filters.kind_id);
-    if (filters?.training !== undefined)
-      params.set("training", String(filters.training));
-    if (filters?.sort_by) params.set("sort_by", filters.sort_by);
-    if (filters?.sort_order) params.set("sort_order", filters.sort_order);
-
-    const response = await api_client.get<PaginatedResponse<Test>>(
-      `/tests?${params}`
-    );
-    return response.data;
-  },
-
-  async get_test(id: number): Promise<Test | null> {
-    const response = await api_client.get<Test>(`/tests/${id}`);
-    return response.data;
-  },
-
-  async start_test(test_id: number): Promise<TestAttempt> {
-    const response = await api_client.post<TestAttempt>(
-      `/tests/${test_id}/start`
-    );
-    return response.data;
-  },
-
-  async save_answer(
-    attempt_id: string,
-    question_id: number,
-    answer: Partial<QuestionAttempt>
-  ): Promise<void> {
-    await api_client.patch(
-      `/attempts/${attempt_id}/questions/${question_id}`,
-      answer
-    );
-  },
-
-  async finish_test(
-    attempt_id: string,
-    answers: QuestionAttempt[],
-    elapsed_time: number
-  ): Promise<TestResult> {
-    const response = await api_client.post<TestResult>(
-      `/attempts/${attempt_id}/finish`,
-      { answers, elapsed_time }
-    );
-    return response.data;
-  },
-
-  async get_result(attempt_id: string): Promise<TestResult | null> {
-    const response = await api_client.get<TestResult>(
-      `/attempts/${attempt_id}/result`
-    );
-    return response.data;
-  },
-};
-
-// ============================================
 // EXPORT
 // ============================================
 
-export const test_service = env.IS_DEV ? mock_test_service : real_test_service;
+export const test_service = mock_test_service;
