@@ -37,7 +37,7 @@ const mock_auth_service = {
       user: {
         id: "1",
         email: data.email,
-        name: data.email.split("@")[0],
+        name: "María López García",
       },
       token: "mock_token_" + Date.now(),
     };
@@ -71,8 +71,8 @@ const mock_auth_service = {
     await delay(200);
     return {
       id: "1",
-      email: "demo@postal3.com",
-      name: "Usuario Demo",
+      email: "maria@postal3.com",
+      name: "María López García",
     };
   },
 
@@ -81,8 +81,8 @@ const mock_auth_service = {
     return {
       user: {
         id: "1",
-        email: "demo@postal3.com",
-        name: "Usuario Demo",
+        email: "maria@postal3.com",
+        name: "María López García",
       },
       token: "mock_token_" + Date.now(),
     };

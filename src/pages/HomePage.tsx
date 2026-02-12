@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { use_auth_store } from "@/stores/auth-store";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import {
   BookOpen,
   ArrowRight,
@@ -11,143 +20,454 @@ import {
   Shield,
   BarChart3,
   MessageCircle,
+  CheckCircle2,
+  Star,
+  GraduationCap,
+  Quote,
 } from "lucide-react";
 
 // ============================================
-// LANDING (no autenticado)
+// LANDING — "Calm Authority" editorial style
 // ============================================
+
+const DOT_GRID = {
+  backgroundImage: "radial-gradient(circle, oklch(0.75 0.01 285) 1px, transparent 1px)",
+  backgroundSize: "28px 28px",
+} as const;
+
+const DOT_GRID_DARK = "dark:[background-image:radial-gradient(circle,oklch(0.3_0.01_285)_1px,transparent_1px)]";
 
 function Landing() {
   return (
     <div>
-      <section className="relative py-20 sm:py-28">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-50 dark:from-slate-950 to-background" />
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-4">
-              Plataforma de preparación de oposiciones
-            </p>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight tracking-tight">
-              Tu preparación, medida y{" "}
-              <span className="text-violet-600 dark:text-violet-400">respaldada por datos</span>
-            </h1>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-              Practica con tests oficiales, analiza tu rendimiento por tema y compara tu progreso
-              con otros opositores. Todo en un mismo lugar.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                to="/register"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-violet-600 px-7 py-3 text-sm font-semibold text-white hover:bg-violet-700 transition-colors"
+      {/* ═══════════════════════════════════════════
+          HERO — Left-aligned, editorial, with mockup
+          ═══════════════════════════════════════════ */}
+      <section className="relative min-h-[88vh] flex items-center">
+        {/* Dot grid background */}
+        <div
+          className={`absolute inset-0 -z-20 opacity-[0.35] dark:opacity-100 ${DOT_GRID_DARK}`}
+          style={DOT_GRID}
+        />
+        {/* Gradient fade bottom */}
+        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent -z-10" />
+        {/* Soft blush top-right */}
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-violet-200/20 dark:bg-violet-900/10 blur-[100px] -z-10" />
+
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 w-full py-20 sm:py-0">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* ── Left: Copy ── */}
+            <div className="lg:col-span-5">
+              <Badge
+                variant="outline"
+                className="mb-8 border-violet-200 dark:border-violet-800 text-violet-700 dark:text-violet-300 text-xs font-semibold px-3 py-1 gap-1.5"
               >
-                Crear cuenta
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/login"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-7 py-3 text-sm font-semibold text-foreground hover:border-border/80 hover:bg-muted transition-colors"
-              >
-                Acceder
-              </Link>
+                <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
+                Oposiciones con gamificación
+              </Badge>
+
+              <h1 className="text-[2.6rem] sm:text-5xl xl:text-[3.4rem] font-extrabold text-foreground leading-[1.08] tracking-tight">
+                Deja de estudiar
+                <br />
+                <span className="text-violet-600 dark:text-violet-400">a ciegas.</span>
+              </h1>
+
+              <p className="mt-6 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-md">
+                12.000 preguntas oficiales. Analítica por tema. Rachas diarias.
+                Ligas competitivas. Un sistema diseñado para que
+                {" "}<span className="text-foreground font-semibold">apruebes tu oposición</span>.
+              </p>
+
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <Button size="lg" className="h-11 px-6 rounded-xl font-bold btn-primary-glow" asChild>
+                  <Link to="/register">
+                    Empezar ahora
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="ghost" className="h-11 px-6 rounded-xl font-semibold text-muted-foreground" asChild>
+                  <Link to="/login">Ya tengo cuenta</Link>
+                </Button>
+              </div>
+
+              <div className="mt-6 flex items-center gap-5 text-xs text-muted-foreground">
+                {["12.000+ preguntas oficiales", "Analítica por tema", "Rachas y ligas"].map((t) => (
+                  <span key={t} className="flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Right: Hero image ── */}
+            <div className="lg:col-span-7 relative">
+              <img
+                src="/opo_friendly.png"
+                alt="Preparación de oposiciones con Postal3"
+                className="relative w-full object-contain"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-border bg-muted/50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-border">
+      {/* ═══════════════════════════════════════════
+          METRICS STRIP
+          ═══════════════════════════════════════════ */}
+      <section className="border-y border-border">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-border">
             {[
-              { value: "12.000+", label: "Preguntas oficiales" },
-              { value: "5", label: "Oposiciones disponibles" },
-              { value: "98%", label: "Precisión del contenido" },
-              { value: "24/7", label: "Acceso sin restricciones" },
-            ].map((stat) => (
-              <div key={stat.label} className="px-6 py-8 text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-foreground">{stat.value}</p>
-                <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
+              { value: "12.847", label: "Preguntas oficiales" },
+              { value: "2.400+", label: "Opositoras activas" },
+              { value: "85%", label: "Tasa de aprobados" },
+              { value: "4,8★", label: "Satisfacción media" },
+            ].map((s) => (
+              <div key={s.label} className="py-8 sm:py-10 text-center">
+                <p className="text-xl sm:text-2xl font-extrabold text-foreground tabular-nums tracking-tight">{s.value}</p>
+                <p className="text-[11px] text-muted-foreground mt-1 font-medium">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
-              Herramientas para aprobar
+      {/* ═══════════════════════════════════════════
+          FEATURES — Bento grid
+          ═══════════════════════════════════════════ */}
+      <section className="py-24 sm:py-32">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <div className="max-w-lg mb-16">
+            <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">Funcionalidades</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-[1.15]">
+              Diseñado para que apruebes,
+              <br className="hidden sm:block" />
+              no para que estudies más.
             </h2>
-            <p className="text-muted-foreground mt-3 max-w-lg mx-auto">
-              Cada funcionalidad diseñada para que tu tiempo de estudio rinda al máximo.
-            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+
+          {/* Bento grid */}
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+            {/* Tests — spans 4 cols */}
+            <Card className="md:col-span-4 group border-border hover:border-violet-200 dark:hover:border-violet-800 transition-colors duration-300 overflow-hidden">
+              <CardContent className="p-7 sm:p-8 flex flex-col h-full">
+                <div className="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 flex items-center justify-center mb-5">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">Tests oficiales por temas</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                  Preguntas reales de convocatorias anteriores, organizadas por materia y dificultad.
+                  Practica exactamente lo que entra en tu examen.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mt-auto">
+                  {["Constitución", "Ley 39/2015", "EBEP", "Ley 40/2015", "Procedimiento"].map((tag) => (
+                    <span key={tag} className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-muted text-muted-foreground">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* ELO — spans 2 cols */}
+            <Card className="md:col-span-2 group border-border hover:border-indigo-200 dark:hover:border-indigo-800 transition-colors duration-300">
+              <CardContent className="p-7 sm:p-8 flex flex-col h-full">
+                <div className="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-5">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">Sistema ELO</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Rating objetivo que refleja tu nivel real con cada test que completas.
+                </p>
+                {/* Mini ELO visual */}
+                <div className="mt-auto pt-5">
+                  <div className="flex items-end gap-1 h-10">
+                    {[30, 45, 38, 52, 60, 55, 72, 68, 80, 85, 78, 90].map((h, i) => (
+                      <div
+                        key={i}
+                        className="flex-1 rounded-sm bg-indigo-200 dark:bg-indigo-800/50 transition-all"
+                        style={{ height: `${h}%` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Streaks — 2 cols */}
+            <Card className="md:col-span-2 group border-border hover:border-orange-200 dark:hover:border-orange-800 transition-colors duration-300">
+              <CardContent className="p-7 sm:p-8">
+                <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-5">
+                  <Flame className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">Rachas diarias</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Mantén el hábito con rachas, hitos y recompensas que te premian por la constancia.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Analytics — 2 cols */}
+            <Card className="md:col-span-2 group border-border hover:border-emerald-200 dark:hover:border-emerald-800 transition-colors duration-300">
+              <CardContent className="p-7 sm:p-8">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5">
+                  <BarChart3 className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">Analítica detallada</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Identifica temas débiles. Mide tu progreso. Optimiza tu plan de estudio con datos reales.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Leagues — 2 cols */}
+            <Card className="md:col-span-2 group border-border hover:border-amber-200 dark:hover:border-amber-800 transition-colors duration-300">
+              <CardContent className="p-7 sm:p-8">
+                <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-5">
+                  <Trophy className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">Ligas semanales</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Compite con opositoras de tu nivel. Asciende de liga cada semana demostrando constancia.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          HOW IT WORKS — 3 steps, horizontal
+          ═══════════════════════════════════════════ */}
+      <section className="py-24 sm:py-28 border-y border-border bg-muted/40">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <div className="max-w-lg mb-16">
+            <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">Cómo funciona</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+              De cero a estudiar en 2 minutos
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
+                step: "01",
+                icon: GraduationCap,
+                title: "Elige tu oposición",
+                description: "Auxiliar, Administrativo, Tramitación, Auxilio Judicial o Correos. Selecciona y empezamos.",
+              },
+              {
+                step: "02",
                 icon: BookOpen,
-                title: "Tests por temas",
-                description:
-                  "Preguntas reales de convocatorias anteriores, organizadas por materia y dificultad.",
+                title: "Haz tests cada día",
+                description: "Preguntas de exámenes reales. Respuestas explicadas. Marca las difíciles para repasar.",
               },
               {
+                step: "03",
                 icon: BarChart3,
-                title: "Analítica de rendimiento",
-                description:
-                  "Visualiza tu evolución, identifica temas débiles y optimiza tu plan de estudio.",
+                title: "Mide y compite",
+                description: "Analítica por tema, rating ELO, ligas semanales. Sabrás exactamente dónde estás.",
               },
-              {
-                icon: TrendingUp,
-                title: "Sistema ELO",
-                description:
-                  "Puntuación objetiva de tu nivel que se actualiza con cada test completado.",
-              },
-              {
-                icon: Trophy,
-                title: "Ligas semanales",
-                description:
-                  "Compite en tu categoría y sube de liga demostrando constancia y resultados.",
-              },
-              {
-                icon: Shield,
-                title: "Coach inteligente",
-                description:
-                  "Recomendaciones personalizadas basadas en tus errores y patrones de estudio.",
-              },
-              {
-                icon: Flame,
-                title: "Rachas y logros",
-                description:
-                  "Mantén la disciplina diaria con un sistema de rachas y badges por hitos.",
-              },
-            ].map((f) => (
-              <div
-                key={f.title}
-                className="rounded-xl border border-border p-6 hover:border-border/80 transition-colors"
-              >
-                <f.icon className="w-5 h-5 text-violet-600 dark:text-violet-400 mb-4" />
-                <h3 className="font-semibold text-foreground mb-2 text-sm">{f.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{f.description}</p>
+            ].map((s) => (
+              <div key={s.step} className="relative">
+                <span className="text-6xl sm:text-7xl font-extrabold text-muted/80 dark:text-muted leading-none select-none">
+                  {s.step}
+                </span>
+                <div className="mt-4">
+                  <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.description}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-muted/50 border-t border-border">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-3">
-            Empieza a prepararte hoy
+      {/* ═══════════════════════════════════════════
+          TESTIMONIALS — 1 featured + 2 supporting
+          ═══════════════════════════════════════════ */}
+      <section className="py-24 sm:py-32">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <div className="max-w-lg mb-16">
+            <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">Testimonios</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+              Lo que dicen nuestras opositoras
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            {/* Featured testimonial */}
+            <Card className="lg:col-span-3 border-violet-200 dark:border-violet-900/50 bg-violet-50/50 dark:bg-violet-950/20">
+              <CardContent className="p-8 sm:p-10">
+                <Quote className="w-8 h-8 text-violet-300 dark:text-violet-700 mb-4" />
+                <p className="text-lg sm:text-xl text-foreground leading-relaxed font-medium mb-8">
+                  Las rachas me han cambiado la forma de estudiar. Antes dejaba de preparar
+                  a los pocos días. Ahora llevo 45 días seguidos sin fallar. La analítica me
+                  mostró que fallaba siempre en Procedimiento Administrativo — enfoqué ahí
+                  el repaso y subí un 20% en un mes.
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-violet-200 dark:bg-violet-800 flex items-center justify-center">
+                    <span className="text-xs font-bold text-violet-700 dark:text-violet-300">LM</span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-foreground">Laura Martínez</p>
+                    <p className="text-xs text-muted-foreground">Auxiliar Administrativo — aprobó en 2025</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Supporting testimonials */}
+            <div className="lg:col-span-2 flex flex-col gap-6">
+              {[
+                {
+                  text: "El sistema de ligas me motiva muchísimo. Competir con otras opositoras hace que estudiar sea mucho menos aburrido. He subido a Oro en 3 semanas.",
+                  name: "Carmen Rodríguez",
+                  initials: "CR",
+                  role: "Tramitación Procesal",
+                },
+                {
+                  text: "La clave para mí fue la analítica. Descubrí que fallaba siempre los mismos temas. Enfoqué el repaso y aprobé a la primera convocatoria.",
+                  name: "Ana García",
+                  initials: "AG",
+                  role: "Administrativo del Estado",
+                },
+              ].map((t) => (
+                <Card key={t.name} className="flex-1 border-border">
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <div className="flex gap-0.5 mb-3">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-foreground leading-relaxed flex-1">
+                      "{t.text}"
+                    </p>
+                    <div className="flex items-center gap-2.5 mt-4 pt-4 border-t border-border">
+                      <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center">
+                        <span className="text-[10px] font-bold text-muted-foreground">{t.initials}</span>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-foreground">{t.name}</p>
+                        <p className="text-[10px] text-muted-foreground">{t.role}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          FAQ
+          ═══════════════════════════════════════════ */}
+      <section className="py-24 sm:py-28 border-y border-border bg-muted/40">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+            {/* Left: heading */}
+            <div className="lg:col-span-2">
+              <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">FAQ</p>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-[1.15]">
+                Preguntas
+                <br />
+                frecuentes
+              </h2>
+              <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
+                Si tienes otra duda, escríbenos a{" "}
+                <span className="text-foreground font-semibold">hola@postal3.es</span>
+              </p>
+            </div>
+
+            {/* Right: accordion */}
+            <div className="lg:col-span-3">
+              <Accordion type="single" collapsible className="space-y-2">
+                {[
+                  {
+                    q: "¿Cuánto cuesta?",
+                    a: "Consulta los planes disponibles en nuestra web. Ofrecemos diferentes opciones para que elijas la que mejor se adapte a ti.",
+                  },
+                  {
+                    q: "¿Qué oposiciones están disponibles?",
+                    a: "Auxiliar Administrativo del Estado, Administrativo del Estado, Tramitación Procesal, Auxilio Judicial y Correos y Telégrafos.",
+                  },
+                  {
+                    q: "¿Las preguntas son de exámenes reales?",
+                    a: "Sí. El banco de preguntas está formado por preguntas de convocatorias oficiales anteriores, revisadas y actualizadas por nuestro equipo.",
+                  },
+                  {
+                    q: "¿Cómo funciona el sistema de ligas?",
+                    a: "Cada semana compites con opositoras de tu nivel. Las mejores ascienden (Bronce → Plata → Oro → Diamante) y las que menos practican descienden.",
+                  },
+                  {
+                    q: "¿Funciona en el móvil?",
+                    a: "Sí. La plataforma es 100% responsive y funciona en cualquier dispositivo con navegador web.",
+                  },
+                ].map((faq, i) => (
+                  <AccordionItem key={i} value={`faq-${i}`} className="rounded-xl border border-border bg-card px-5">
+                    <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline py-4">
+                      {faq.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
+                      {faq.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          FINAL CTA — Dark violet block
+          ═══════════════════════════════════════════ */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-stone-950 dark:bg-stone-950" />
+        {/* Subtle dot grid on dark */}
+        <div
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage: "radial-gradient(circle, #a78bfa 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+        {/* Violet glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-violet-600/15 rounded-full blur-[120px]" />
+
+        <div className="relative max-w-3xl mx-auto px-5 sm:px-8 py-24 sm:py-32 text-center">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-5">
+            Tu plaza te está esperando.
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-            Accede a todos los tests y herramientas de seguimiento sin compromiso.
+          <p className="text-base sm:text-lg text-stone-400 mb-10 max-w-lg mx-auto leading-relaxed">
+            Cada día que no estudias es un día que te aleja de tu objetivo.
+            Empieza ahora y únete a miles de opositoras que ya confían en Postal3.
           </p>
-          <Link
-            to="/register"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-violet-600 px-7 py-3 text-sm font-semibold text-white hover:bg-violet-700 transition-colors"
-          >
-            Crear cuenta gratuita
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button
+              size="lg"
+              className="h-12 px-8 rounded-xl bg-white text-stone-900 hover:bg-stone-100 font-bold shadow-xl shadow-white/10 text-sm"
+              asChild
+            >
+              <Link to="/register">
+                Crear cuenta
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-12 px-8 rounded-xl border-stone-700 text-stone-300 hover:bg-stone-800/50 hover:text-white font-semibold text-sm"
+              asChild
+            >
+              <Link to="/login">
+                Acceder a mi cuenta
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
     </div>

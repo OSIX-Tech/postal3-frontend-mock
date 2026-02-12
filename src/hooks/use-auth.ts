@@ -48,7 +48,7 @@ export function use_auth() {
       store_logout();
       query_client.clear();
       toast.success("Sesión cerrada");
-      navigate("/login");
+      navigate("/");
     },
   });
 

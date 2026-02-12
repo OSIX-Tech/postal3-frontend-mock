@@ -47,7 +47,7 @@ const mock_oposiciones: Oposicion[] = [
 
 const mock_my_profile: MyProfile = {
   id: "1",
-  name: "Guti \"Guti\" Gutierrez",
+  name: "María López García",
   email: "maria@postal3.com",
   avatar: "/opo_study.png",
   bio: "Opositora de Auxiliar Administrativo. ¡A por todas! 💪",
