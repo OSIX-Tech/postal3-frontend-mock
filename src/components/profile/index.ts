@@ -1,0 +1,14 @@
+export { ProfileHeader } from "./ProfileHeader";
+export { ProfileAvatar } from "./ProfileAvatar";
+export { BadgeGrid } from "./BadgeGrid";
+export { BadgeCard } from "./BadgeCard";
+export { StatsSection } from "./StatsSection";
+export { StatCard } from "./StatCard";
+export { LeagueBadge } from "./LeagueBadge";
+export { StreakDisplay } from "./StreakDisplay";
+export { EloDisplay } from "./EloDisplay";
+export { FriendshipActions } from "./FriendshipActions";
+export { AvatarUploadDialog } from "./AvatarUploadDialog";
+export { ProfileInfoForm, PrivacySettingsForm } from "./SettingsForm";
+export { OposicionSelector } from "./OposicionSelector";
+export { BlockedUsersList } from "./BlockedUsersList";

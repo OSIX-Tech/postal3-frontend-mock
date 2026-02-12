@@ -1,0 +1,489 @@
+/* Google Fonts - Nunito (debe ir primero) */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ============================================
+   POSTAL3 DESIGN SYSTEM - Modern Violet
+   ============================================ */
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   DESIGN TOKENS - Modern Palette
+   ============================================ */
+
+@layer base {
+  :root {
+    /* === Brand Colors - Violet Primary === */
+    --color-brand-primary: #8B5CF6;
+    --color-brand-primary-hover: #7C3AED;
+    --color-brand-secondary: #A78BFA;
+    --color-brand-accent: #C4B5FD;
+
+    /* === Test States (modernizados) === */
+    --color-test-correct: #10B981;
+    --color-test-incorrect: #F43F5E;
+    --color-test-unanswered: #6366F1;
+    --color-test-star: #F59E0B;
+
+    /* === Semantic Colors === */
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+    --color-info: #3B82F6;
+
+    /* === Neutral Scale (warm grays) === */
+    --color-gray-50: #FAFAF9;
+    --color-gray-100: #F5F5F4;
+    --color-gray-200: #E7E5E4;
+    --color-gray-300: #D6D3D1;
+    --color-gray-400: #A8A29E;
+    --color-gray-500: #78716C;
+    --color-gray-600: #57534E;
+    --color-gray-700: #44403C;
+    --color-gray-800: #292524;
+    --color-gray-900: #1C1917;
+
+    /* === Typography === */
+    --font-family-base: 'Nunito', system-ui, sans-serif;
+    --font-size-base: 1rem;
+    --line-height-base: 1.6;
+
+    /* === Spacing Scale (más generoso) === */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+
+    /* === Modern Shadows (con tinte violeta) === */
+    --shadow-sm: 0 1px 2px 0 rgb(139 92 246 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(139 92 246 / 0.08), 0 2px 4px -2px rgb(139 92 246 / 0.06);
+    --shadow-lg: 0 10px 15px -3px rgb(139 92 246 / 0.1), 0 4px 6px -4px rgb(139 92 246 / 0.08);
+    --shadow-xl: 0 20px 25px -5px rgb(139 92 246 / 0.12), 0 8px 10px -6px rgb(139 92 246 / 0.08);
+    --shadow-hover: 0 20px 40px -12px rgb(139 92 246 / 0.25);
+    --shadow-glow: 0 0 20px rgb(139 92 246 / 0.3);
+  }
+
+  .dark {
+    --color-brand-primary: #A78BFA;
+    --color-brand-primary-hover: #C4B5FD;
+
+    --color-gray-50: #1C1917;
+    --color-gray-100: #292524;
+    --color-gray-200: #44403C;
+    --color-gray-300: #57534E;
+    --color-gray-400: #78716C;
+    --color-gray-500: #A8A29E;
+    --color-gray-600: #D6D3D1;
+    --color-gray-700: #E7E5E4;
+    --color-gray-800: #F5F5F4;
+    --color-gray-900: #FAFAF9;
+  }
+}
+
+/* ============================================
+   SHADCN/UI THEME TOKENS
+   ============================================ */
+
+@theme inline {
+  --font-sans: 'Nunito', system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* === Base === */
+  --background: oklch(0.995 0.002 285);
+  --foreground: oklch(0.13 0.02 285);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.02 285);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0.02 285);
+
+  /* === Primary: Violet #8B5CF6 === */
+  --primary: oklch(0.585 0.22 292);
+  --primary-foreground: oklch(1 0 0);
+
+  /* === Secondary: Light Violet === */
+  --secondary: oklch(0.95 0.03 292);
+  --secondary-foreground: oklch(0.40 0.15 292);
+
+  /* === Muted & Accent === */
+  --muted: oklch(0.96 0.005 285);
+  --muted-foreground: oklch(0.50 0.01 285);
+  --accent: oklch(0.94 0.04 292);
+  --accent-foreground: oklch(0.35 0.15 292);
+
+  /* === Destructive: Rose #F43F5E === */
+  --destructive: oklch(0.60 0.22 12);
+
+  /* === Borders & Inputs === */
+  --border: oklch(0.91 0.01 285);
+  --input: oklch(0.91 0.01 285);
+  --ring: oklch(0.585 0.22 292);
+
+  /* === Charts (para estadísticas de tests) === */
+  --chart-1: oklch(0.65 0.19 160);  /* Correct - Emerald */
+  --chart-2: oklch(0.60 0.22 12);   /* Incorrect - Rose */
+  --chart-3: oklch(0.60 0.22 264);  /* Unanswered - Indigo */
+  --chart-4: oklch(0.585 0.22 292); /* Primary - Violet */
+  --chart-5: oklch(0.75 0.16 70);   /* Star - Amber */
+
+  /* === Sidebar === */
+  --sidebar: oklch(0.98 0.01 292);
+  --sidebar-foreground: oklch(0.13 0.02 285);
+  --sidebar-primary: oklch(0.585 0.22 292);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.94 0.04 292);
+  --sidebar-accent-foreground: oklch(0.35 0.15 292);
+  --sidebar-border: oklch(0.91 0.01 285);
+  --sidebar-ring: oklch(0.585 0.22 292);
+}
+
+.dark {
+  --background: oklch(0.13 0.015 285);
+  --foreground: oklch(0.97 0.005 285);
+  --card: oklch(0.17 0.02 285);
+  --card-foreground: oklch(0.97 0.005 285);
+  --popover: oklch(0.17 0.02 285);
+  --popover-foreground: oklch(0.97 0.005 285);
+
+  /* Primary más brillante en dark */
+  --primary: oklch(0.72 0.18 292);
+  --primary-foreground: oklch(0.13 0.02 285);
+
+  --secondary: oklch(0.25 0.03 292);
+  --secondary-foreground: oklch(0.85 0.05 292);
+
+  --muted: oklch(0.22 0.015 285);
+  --muted-foreground: oklch(0.65 0.01 285);
+  --accent: oklch(0.28 0.05 292);
+  --accent-foreground: oklch(0.90 0.03 292);
+
+  --destructive: oklch(0.55 0.20 12);
+
+  --border: oklch(0.28 0.02 285);
+  --input: oklch(0.28 0.02 285);
+  --ring: oklch(0.72 0.18 292);
+
+  --sidebar: oklch(0.15 0.02 292);
+  --sidebar-foreground: oklch(0.97 0.005 285);
+  --sidebar-primary: oklch(0.72 0.18 292);
+  --sidebar-primary-foreground: oklch(0.13 0.02 285);
+  --sidebar-accent: oklch(0.28 0.05 292);
+  --sidebar-accent-foreground: oklch(0.90 0.03 292);
+  --sidebar-border: oklch(0.28 0.02 285);
+  --sidebar-ring: oklch(0.72 0.18 292);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-family-base);
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  /* Focus visible para accesibilidad */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES (from Laravel legacy)
+   ============================================ */
+
+@layer utilities {
+  /* === Aspect Ratios === */
+  .ratio-1-1 {
+    aspect-ratio: 1 / 1;
+  }
+
+  .ratio-3-2 {
+    aspect-ratio: 3 / 2;
+  }
+
+  .ratio-4-3 {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ratio-16-9 {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* === Line Clamp === */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* === Test State Colors === */
+  .text-test-correct {
+    color: var(--color-test-correct);
+  }
+
+  .text-test-incorrect {
+    color: var(--color-test-incorrect);
+  }
+
+  .text-test-unanswered {
+    color: var(--color-test-unanswered);
+  }
+
+  .text-test-star {
+    color: var(--color-test-star);
+  }
+
+  .bg-test-correct {
+    background-color: var(--color-test-correct);
+  }
+
+  .bg-test-incorrect {
+    background-color: var(--color-test-incorrect);
+  }
+
+  .bg-test-unanswered {
+    background-color: var(--color-test-unanswered);
+  }
+
+  /* === Modern Hover Effects === */
+  .hoverable {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hoverable:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  /* === Glow Effect === */
+  .glow-on-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glow-on-hover:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* === Gradient Text === */
+  .gradient-text {
+    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #C4B5FD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* === Glass Effect === */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .dark .glass {
+    background: rgba(28, 25, 23, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* === Medal Shimmer Animation === */
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  /* === Animated Gradient Border === */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(var(--background), var(--background)) padding-box,
+                linear-gradient(135deg, #8B5CF6, #A78BFA, #C4B5FD) border-box;
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+  }
+
+  /* === Scrollbar === */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+}
+
+/* ============================================
+   COMPONENT PATTERNS - Modern
+   ============================================ */
+
+@layer components {
+  /* === Status Bar (para tests) === */
+  .status-bar {
+    @apply fixed bottom-0 left-0 right-0 z-50;
+    background: linear-gradient(135deg, #1C1917 0%, #292524 100%);
+    @apply text-white;
+    @apply flex items-center justify-between;
+    @apply px-6 py-4;
+    @apply shadow-xl;
+  }
+
+  /* === Card Catalog Item === */
+  .card-catalog {
+    @apply flex flex-col h-full;
+    @apply bg-card rounded-xl border;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-catalog:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  /* === Sidebar === */
+  .sidebar-aside {
+    @apply space-y-6;
+  }
+
+  .sidebar-card {
+    @apply bg-card rounded-xl border p-5;
+    @apply shadow-sm;
+  }
+
+  .sidebar-card-title {
+    @apply font-bold text-xs text-muted-foreground uppercase tracking-widest mb-4;
+  }
+
+  /* === Modern Button States === */
+  .btn-primary-glow {
+    background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    box-shadow: 0 4px 14px 0 rgb(139 92 246 / 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-primary-glow:hover {
+    box-shadow: 0 6px 20px 0 rgb(139 92 246 / 0.5);
+    transform: translateY(-2px);
+  }
+
+  /* === Test State Pills === */
+  .pill-correct {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+  }
+
+  .pill-incorrect {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold;
+    background: linear-gradient(135deg, #F43F5E 0%, #E11D48 100%);
+    color: white;
+  }
+
+  .pill-unanswered {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold;
+    background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+    color: white;
+  }
+
+  /* === Score Badge === */
+  .score-badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-sm font-bold;
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: white;
+  }
+
+  /* === Progress Bar Modern === */
+  .progress-modern {
+    @apply h-2 rounded-full overflow-hidden;
+    background: var(--muted);
+  }
+
+  .progress-modern-bar {
+    @apply h-full rounded-full;
+    background: linear-gradient(90deg, #8B5CF6 0%, #A78BFA 100%);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
