@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { use_auth_store } from "@/stores/auth-store";
+import { use_coach } from "@/hooks/use-coach";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,9 +18,7 @@ import {
   Flame,
   Target,
   TrendingUp,
-  Shield,
   BarChart3,
-  MessageCircle,
   CheckCircle2,
   Star,
   GraduationCap,
@@ -478,63 +477,6 @@ function Landing() {
 // DASHBOARD (autenticado)
 // ============================================
 
-function CoachBubble() {
-  const [open, set_open] = useState(false);
-
-  return (
-    <>
-      {/* Botón flotante */}
-      <button
-        onClick={() => set_open(true)}
-        className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-indigo-500 text-white shadow-lg shadow-indigo-500/30 flex items-center justify-center hover:bg-indigo-600 hover:scale-105 active:scale-95 transition-all"
-      >
-        <MessageCircle className="w-5 h-5" />
-      </button>
-
-      {/* Backdrop */}
-      <div
-        className={`fixed inset-0 z-40 bg-black/15 backdrop-blur-[2px] transition-opacity duration-200 ${
-          open ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => set_open(false)}
-      />
-
-      {/* Bocadillo — sale desde abajo-derecha pegado al botón */}
-      <div
-        className={`fixed z-50 bottom-20 right-6 w-72 bg-card rounded-2xl shadow-xl border border-border p-5 transition-all duration-300 origin-bottom-right ${
-          open
-            ? "opacity-100 scale-100 translate-y-0"
-            : "opacity-0 scale-90 translate-y-3 pointer-events-none"
-        }`}
-      >
-        {/* Piquito / triangle */}
-        <div className="absolute -bottom-2 right-5 w-4 h-4 bg-card border-r border-b border-border rotate-45" />
-
-        <div className="flex items-center gap-2.5 mb-3">
-          <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
-            <Shield className="w-4 h-4 text-indigo-500" />
-          </div>
-          <p className="text-sm font-bold text-foreground">Tu coach</p>
-        </div>
-
-        <p className="text-[13px] text-muted-foreground leading-relaxed mb-4">
-          Tu rendimiento en <b className="text-foreground">Ley 40/2015</b> está
-          por debajo de tu media. Haz 2 tests de repaso esta semana.
-        </p>
-
-        <Link
-          to="/tests"
-          onClick={() => set_open(false)}
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-        >
-          Ir a repasar
-          <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
-      </div>
-    </>
-  );
-}
-
 const TESTS = [
   {
     title: "Constitución",
@@ -571,7 +513,13 @@ const TESTS = [
 
 function Dashboard() {
   const { user } = use_auth_store();
+  const { trigger_app_entry } = use_coach();
   const first_name = user?.name?.split(" ")[0] ?? "";
+
+  useEffect(() => {
+    const timer = setTimeout(() => trigger_app_entry(), 1500);
+    return () => clearTimeout(timer);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="max-w-5xl mx-auto px-5 pt-10 pb-20">
@@ -767,7 +715,6 @@ function Dashboard() {
           </div>
 
         </aside>
-        <CoachBubble />
       </div>
     </div>
   );

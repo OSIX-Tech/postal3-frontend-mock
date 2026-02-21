@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { AppLayout } from "@/components/layout";
 import { use_auth } from "@/hooks/use-auth";
+import { CoachOverlay } from "@/components/coach";
 
 export function RootLayout() {
   const { user, logout } = use_auth();
@@ -14,6 +15,7 @@ export function RootLayout() {
       on_logout={logout}
     >
       <Outlet />
+      <CoachOverlay />
     </AppLayout>
   );
 }

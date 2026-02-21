@@ -13,12 +13,12 @@ import {
   Coins,
   Flame,
   Zap,
-  Bot,
   HelpCircle,
   Home,
   Shuffle,
   Users,
 } from "lucide-react";
+import { use_coach } from "@/hooks/use-coach";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -153,11 +153,19 @@ export function TestResultsPage() {
   const [impugn_argument, set_impugn_argument] = useState("");
   const [doubt_text, set_doubt_text] = useState("");
   const [gamification_visible, set_gamification_visible] = useState(false);
+  const { trigger_post_test } = use_coach();
 
   useEffect(() => {
     const timer = setTimeout(() => set_gamification_visible(true), 300);
     return () => clearTimeout(timer);
   }, []);
+
+  // Trigger coach overlay after animations settle
+  useEffect(() => {
+    if (!result) return;
+    const timer = setTimeout(() => trigger_post_test(result), 3000);
+    return () => clearTimeout(timer);
+  }, [result?.attempt_id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const animated_points = use_count_up(
     result?.gamification?.points_earned ?? 0
@@ -464,8 +472,8 @@ export function TestResultsPage() {
         </div>
       </div>
 
-      {/* Gamification + Coach row */}
-      {(gamification || result.coach_message) && (
+      {/* Gamification row */}
+      {gamification && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {/* Gamification card */}
           {gamification && (
@@ -590,42 +598,6 @@ export function TestResultsPage() {
             </div>
           )}
 
-          {/* Coach message */}
-          {result.coach_message && (
-            <div
-              className={cn(
-                "rounded-xl border bg-card p-6 transition-all duration-700 delay-200",
-                gamification_visible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-4"
-              )}
-            >
-              <div className="flex items-start gap-3">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-violet-50 dark:bg-violet-950/20 flex-shrink-0">
-                  <Bot className="h-5 w-5 text-[var(--color-brand-primary)]" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-foreground mb-1">
-                    Tu coach dice...
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {result.coach_message}
-                  </p>
-                  {result.score < 80 && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="mt-3 gap-1"
-                      onClick={() => navigate("/tests")}
-                    >
-                      <RotateCcw className="h-3.5 w-3.5" />
-                      Test de refuerzo
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       )}
 
