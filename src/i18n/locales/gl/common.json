@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "tests": "Tests",
+    "my_space": "O Meu Espazo",
+    "design_system": "Design System"
+  },
+  "actions": {
+    "login": "Iniciar sesion",
+    "register": "Rexistrarse",
+    "logout": "Pechar sesion",
+    "cancel": "Cancelar",
+    "retry": "Reintentar",
+    "save": "Gardar",
+    "back": "Volver"
+  },
+  "notifications": {
+    "title": "Notificacions",
+    "view_all": "Ver todas as alertas"
+  },
+  "user_menu": {
+    "my_space": "O meu espazo"
+  },
+  "footer": {
+    "about_us": "Sobre nos",
+    "privacy": "Privacidade",
+    "cookies": "Cookies",
+    "legal": "Aviso legal",
+    "owned_by": "Propiedade de {{name}}",
+    "follow_us": "Seguenos nas redes sociais:",
+    "quick_links": "Ligazons rapidas"
+  },
+  "sidebar": {
+    "my_space": "O Meu Espazo",
+    "configuration": "Configuracion",
+    "tests": "Tests",
+    "resources": "Recursos",
+    "challenges": "Desafios",
+    "statistics": "Estatisticas",
+    "my_streak": "A mina racha",
+    "my_account": "A mina conta",
+    "options": "Opcions",
+    "alerts": "Alertas",
+    "notification_settings": "Axustes de avisos"
+  },
+  "coach": {
+    "title": "O teu Coach",
+    "dismiss": "Agora non"
+  },
+  "not_found": {
+    "title": "404",
+    "message": "Paxina non atopada",
+    "go_home": "Volver ao inicio"
+  },
+  "language": {
+    "label": "Idioma",
+    "es": "Castellano",
+    "gl": "Galego",
+    "eu": "Euskara",
+    "ca": "Català"
+  }
+}

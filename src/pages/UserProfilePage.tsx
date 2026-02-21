@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   ProfileHeader,
   BadgeGrid,
@@ -10,6 +11,7 @@ import { LoadingState, ErrorState } from "@/components/feedback";
 import { Lock } from "lucide-react";
 
 export function UserProfilePage() {
+  const { t } = useTranslation('profile');
   const { id } = useParams<{ id: string }>();
   const {
     profile,
@@ -26,7 +28,7 @@ export function UserProfilePage() {
   if (is_loading) {
     return (
       <div className="container mx-auto px-4 py-8 max-w-3xl">
-        <LoadingState text="Cargando perfil..." />
+        <LoadingState text={t('user_profile.loading')} />
       </div>
     );
   }
@@ -35,7 +37,7 @@ export function UserProfilePage() {
     return (
       <div className="container mx-auto px-4 py-8 max-w-3xl">
         <ErrorState
-          description="No se pudo cargar el perfil del usuario"
+          description={t('user_profile.error')}
           on_retry={() => window.location.reload()}
         />
       </div>
@@ -77,7 +79,7 @@ export function UserProfilePage() {
         {can_see_badges && profile.badges && profile.badges.length > 0 && (
           <div className="space-y-3">
             <h3 className="text-lg font-semibold">
-              Insignias ({profile.badges.length})
+              {t('user_profile.badges')} ({profile.badges.length})
             </h3>
             <BadgeGrid badges={profile.badges} />
           </div>
@@ -86,7 +88,7 @@ export function UserProfilePage() {
         {/* Stats: solo si amigos */}
         {can_see_stats && profile.stats && (
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold">Estadísticas</h3>
+            <h3 className="text-lg font-semibold">{t('user_profile.statistics')}</h3>
             <StatsSection stats={profile.stats} />
           </div>
         )}
@@ -96,8 +98,7 @@ export function UserProfilePage() {
           <div className="flex flex-col items-center gap-3 rounded-lg border bg-card p-8 text-center">
             <Lock className="h-8 w-8 text-muted-foreground" />
             <p className="text-muted-foreground">
-              Este perfil es privado. Envía una solicitud de amistad para ver su
-              contenido.
+              {t('user_profile.private_profile')}
             </p>
           </div>
         )}

@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "tests": "Tests",
+    "my_space": "Nire Gunea",
+    "design_system": "Design System"
+  },
+  "actions": {
+    "login": "Saioa hasi",
+    "register": "Erregistratu",
+    "logout": "Saioa itxi",
+    "cancel": "Utzi",
+    "retry": "Berriro saiatu",
+    "save": "Gorde",
+    "back": "Itzuli"
+  },
+  "notifications": {
+    "title": "Jakinarazpenak",
+    "view_all": "Alerta guztiak ikusi"
+  },
+  "user_menu": {
+    "my_space": "Nire gunea"
+  },
+  "footer": {
+    "about_us": "Guri buruz",
+    "privacy": "Pribatutasuna",
+    "cookies": "Cookies",
+    "legal": "Lege-oharra",
+    "owned_by": "{{name}}(r)en jabetza",
+    "follow_us": "Jarrai gaitzazu sare sozialetan:",
+    "quick_links": "Esteka azkarrak"
+  },
+  "sidebar": {
+    "my_space": "Nire Gunea",
+    "configuration": "Konfigurazioa",
+    "tests": "Tests",
+    "resources": "Baliabideak",
+    "challenges": "Erronkak",
+    "statistics": "Estatistikak",
+    "my_streak": "Nire erronda",
+    "my_account": "Nire kontua",
+    "options": "Aukerak",
+    "alerts": "Alertak",
+    "notification_settings": "Abisu-ezarpenak"
+  },
+  "coach": {
+    "title": "Zure Coach",
+    "dismiss": "Orain ez"
+  },
+  "not_found": {
+    "title": "404",
+    "message": "Orria ez da aurkitu",
+    "go_home": "Hasierara itzuli"
+  },
+  "language": {
+    "label": "Hizkuntza",
+    "es": "Castellano",
+    "gl": "Galego",
+    "eu": "Euskara",
+    "ca": "Català"
+  }
+}

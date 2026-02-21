@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "tests": "Tests",
+    "my_space": "Mi Espacio",
+    "design_system": "Design System"
+  },
+  "actions": {
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar sesión",
+    "cancel": "Cancelar",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "back": "Volver"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "view_all": "Ver todas las alertas"
+  },
+  "user_menu": {
+    "my_space": "Mi espacio"
+  },
+  "footer": {
+    "about_us": "Sobre nosotros",
+    "privacy": "Privacidad",
+    "cookies": "Cookies",
+    "legal": "Aviso legal",
+    "owned_by": "Propiedad de {{name}}",
+    "follow_us": "Síguenos en redes sociales:",
+    "quick_links": "Enlaces rápidos"
+  },
+  "sidebar": {
+    "my_space": "Mi Espacio",
+    "configuration": "Configuración",
+    "tests": "Tests",
+    "resources": "Recursos",
+    "challenges": "Desafíos",
+    "statistics": "Estadísticas",
+    "my_streak": "Mi racha",
+    "my_account": "Mi cuenta",
+    "options": "Opciones",
+    "alerts": "Alertas",
+    "notification_settings": "Ajustes avisos"
+  },
+  "coach": {
+    "title": "Tu Coach",
+    "dismiss": "Ahora no"
+  },
+  "not_found": {
+    "title": "404",
+    "message": "Página no encontrada",
+    "go_home": "Volver al inicio"
+  },
+  "language": {
+    "label": "Idioma",
+    "es": "Castellano",
+    "gl": "Galego",
+    "eu": "Euskara",
+    "ca": "Català"
+  }
+}

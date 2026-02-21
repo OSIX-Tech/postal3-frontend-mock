@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import {
   BookOpen,
@@ -20,27 +21,28 @@ interface MySpaceLayoutProps {
   description?: string
 }
 
-const PRIMARY_NAV = [
-  { href: '/myspace/tests', label: 'Tests', icon: BookOpen },
-  { href: '/myspace/resources', label: 'Recursos', icon: FolderOpen },
-  { href: '/myspace/challenges', label: 'Desafíos', icon: Trophy },
-]
-
-const SECONDARY_NAV = [
-  { href: '/myspace/stats', label: 'Estadísticas', icon: BarChart3 },
-  { href: '/myspace/streaks', label: 'Mi racha', icon: Flame },
-  { href: '/myspace/account', label: 'Mi cuenta', icon: User },
-  { href: '/myspace/options', label: 'Opciones', icon: Settings },
-  { href: '/myspace/alerts', label: 'Alertas', icon: Bell },
-  { href: '/myspace/notifications', label: 'Ajustes avisos', icon: BellRing },
-]
-
 export function MySpaceLayout({
   children,
   title,
   description,
 }: MySpaceLayoutProps) {
+  const { t } = useTranslation()
   const location = useLocation()
+
+  const PRIMARY_NAV = [
+    { href: '/myspace/tests', label: t('sidebar.tests'), icon: BookOpen },
+    { href: '/myspace/resources', label: t('sidebar.resources'), icon: FolderOpen },
+    { href: '/myspace/challenges', label: t('sidebar.challenges'), icon: Trophy },
+  ]
+
+  const SECONDARY_NAV = [
+    { href: '/myspace/stats', label: t('sidebar.statistics'), icon: BarChart3 },
+    { href: '/myspace/streaks', label: t('sidebar.my_streak'), icon: Flame },
+    { href: '/myspace/account', label: t('sidebar.my_account'), icon: User },
+    { href: '/myspace/options', label: t('sidebar.options'), icon: Settings },
+    { href: '/myspace/alerts', label: t('sidebar.alerts'), icon: Bell },
+    { href: '/myspace/notifications', label: t('sidebar.notification_settings'), icon: BellRing },
+  ]
 
   const is_active = (href: string) => location.pathname === href
 
@@ -80,7 +82,7 @@ export function MySpaceLayout({
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                  Mi Espacio
+                  {t('sidebar.my_space')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-1">
@@ -94,7 +96,7 @@ export function MySpaceLayout({
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                  Configuración
+                  {t('sidebar.configuration')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-1">

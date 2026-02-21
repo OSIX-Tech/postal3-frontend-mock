@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import {
   Flame,
@@ -14,8 +15,11 @@ import { StreakRecoveryCard } from "@/components/streaks/StreakRecoveryCard";
 import { streak_service } from "@/services/streak-service";
 import { cn } from "@/lib/utils";
 import { MySpaceLayout } from "@/components/layout/MySpaceLayout";
+import { LOCALE_MAP } from "@/i18n/config";
+import type { SupportedLanguage } from "@/i18n/config";
 
 export function StreakDetailPage() {
+  const { t, i18n } = useTranslation('profile');
   const query_client = useQueryClient();
 
   const { data: streak, isLoading } = useQuery({
@@ -27,16 +31,16 @@ export function StreakDetailPage() {
     mutationFn: () => streak_service.recover_streak(),
     onSuccess: () => {
       query_client.invalidateQueries({ queryKey: ["streak-detail"] });
-      toast.success("Racha recuperada con éxito");
+      toast.success(t('streaks.recovery_success'));
     },
     onError: () => {
-      toast.error("Error al recuperar la racha");
+      toast.error(t('streaks.recovery_error'));
     },
   });
 
   if (isLoading || !streak) {
     return (
-      <MySpaceLayout title="Mi racha" description="Tu actividad y constancia">
+      <MySpaceLayout title={t('streaks.title')} description={t('streaks.description')}>
         <div className="flex items-center justify-center py-16">
           <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
         </div>
@@ -45,13 +49,15 @@ export function StreakDetailPage() {
   }
 
   const STATUS_LABELS = {
-    active: "Activa",
-    at_risk: "En peligro",
-    lost: "Perdida",
+    active: t('streaks.status_active'),
+    at_risk: t('streaks.status_at_risk'),
+    lost: t('streaks.status_lost'),
   };
 
+  const locale = LOCALE_MAP[i18n.language as SupportedLanguage] ?? 'es-ES';
+
   return (
-    <MySpaceLayout title="Mi racha" description="Tu actividad y constancia">
+    <MySpaceLayout title={t('streaks.title')} description={t('streaks.description')}>
       <div className="space-y-6">
         {/* Current streak hero */}
         <Card>
@@ -87,7 +93,7 @@ export function StreakDetailPage() {
                   {streak.current_days}
                 </span>
                 <span className="text-sm text-muted-foreground">
-                  {streak.current_days === 1 ? "día" : "días"} consecutivos
+                  {streak.current_days === 1 ? t('streaks.day_one') : t('streaks.day_other')} {t('streaks.consecutive')}
                 </span>
               </div>
 
@@ -96,17 +102,17 @@ export function StreakDetailPage() {
                 <div className="text-center sm:text-left p-3 rounded-lg bg-muted/50">
                   <div className="flex items-center justify-center sm:justify-start gap-1.5 text-muted-foreground mb-1">
                     <TrendingUp className="h-3.5 w-3.5" />
-                    <span className="text-xs">Mejor racha</span>
+                    <span className="text-xs">{t('streaks.best_streak')}</span>
                   </div>
                   <p className="text-xl font-bold text-foreground">
-                    {streak.best_streak} días
+                    {t('streaks.days_count', { count: streak.best_streak })}
                   </p>
                 </div>
 
                 <div className="text-center sm:text-left p-3 rounded-lg bg-muted/50">
                   <div className="flex items-center justify-center sm:justify-start gap-1.5 text-muted-foreground mb-1">
                     <Calendar className="h-3.5 w-3.5" />
-                    <span className="text-xs">Estado</span>
+                    <span className="text-xs">{t('streaks.status_label')}</span>
                   </div>
                   <p
                     className={cn(
@@ -124,13 +130,13 @@ export function StreakDetailPage() {
                   <div className="col-span-2 text-center sm:text-left p-3 rounded-lg bg-muted/50">
                     <div className="flex items-center justify-center sm:justify-start gap-1.5 text-muted-foreground mb-1">
                       <Trophy className="h-3.5 w-3.5" />
-                      <span className="text-xs">Siguiente hito</span>
+                      <span className="text-xs">{t('streaks.next_milestone')}</span>
                     </div>
                     <p className="text-sm font-semibold text-foreground">
                       {streak.next_milestone.name}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Faltan {streak.next_milestone.days - streak.current_days} días
+                      {t('streaks.days_remaining', { remaining: streak.next_milestone.days - streak.current_days })}
                     </p>
                   </div>
                 )}
@@ -151,7 +157,7 @@ export function StreakDetailPage() {
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
               <Calendar className="h-4 w-4" />
-              Actividad del último año
+              {t('streaks.activity_title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -164,7 +170,7 @@ export function StreakDetailPage() {
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
               <Trophy className="h-4 w-4" />
-              Hitos de racha
+              {t('streaks.milestones_title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -180,7 +186,7 @@ export function StreakDetailPage() {
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
               <TrendingUp className="h-4 w-4" />
-              Historial de rachas
+              {t('streaks.history_title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -208,27 +214,27 @@ export function StreakDetailPage() {
                     />
                     <div>
                       <p className="text-sm font-medium text-foreground">
-                        {entry.days} días
+                        {t('streaks.days_count', { count: entry.days })}
                         {entry.reason === "current" && (
                           <span className="ml-1.5 text-xs font-normal text-orange-600 dark:text-orange-400">
-                            actual
+                            {t('streaks.current')}
                           </span>
                         )}
                         {entry.reason === "recovered" && (
                           <span className="ml-1.5 text-xs font-normal text-amber-600 dark:text-amber-400">
-                            recuperada
+                            {t('streaks.recovered')}
                           </span>
                         )}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {new Date(entry.started_at).toLocaleDateString("es-ES", {
+                        {new Date(entry.started_at).toLocaleDateString(locale, {
                           day: "numeric",
                           month: "short",
                         })}
                         {" — "}
                         {entry.reason === "current"
-                          ? "hoy"
-                          : new Date(entry.ended_at).toLocaleDateString("es-ES", {
+                          ? t('streaks.today')
+                          : new Date(entry.ended_at).toLocaleDateString(locale, {
                               day: "numeric",
                               month: "short",
                             })}

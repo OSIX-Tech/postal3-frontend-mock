@@ -3,26 +3,28 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Link } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, User } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 
-const register_schema = z
-  .object({
-    name: z.string().min(2, "Mínimo 2 caracteres"),
-    email: z.string().email("Email inválido"),
-    password: z.string().min(8, "Mínimo 8 caracteres"),
+function create_register_schema(t: TFunction<'auth'>) {
+  return z.object({
+    name: z.string().min(2, t('validation.min_2_chars')),
+    email: z.string().email(t('validation.email_invalid')),
+    password: z.string().min(8, t('validation.min_8_chars')),
     confirm_password: z.string(),
-  })
-  .refine((data) => data.password === data.confirm_password, {
-    message: "Las contraseñas no coinciden",
-    path: ["confirm_password"],
+  }).refine((data) => data.password === data.confirm_password, {
+    message: t('validation.passwords_no_match'),
+    path: ['confirm_password'],
   });
+}
 
-type RegisterFormData = z.infer<typeof register_schema>;
+type RegisterFormData = z.infer<ReturnType<typeof create_register_schema>>;
 
 export interface RegisterSubmitData {
   name: string;
@@ -37,8 +39,10 @@ interface RegisterFormProps {
 }
 
 export function RegisterForm({ on_submit, is_loading, error }: RegisterFormProps) {
+  const { t } = useTranslation('auth');
   const [show_password, set_show_password] = useState(false);
   const [show_confirm, set_show_confirm] = useState(false);
+  const register_schema = useMemo(() => create_register_schema(t), [t]);
 
   const {
     register,
@@ -71,13 +75,13 @@ export function RegisterForm({ on_submit, is_loading, error }: RegisterFormProps
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="name">Nombre</Label>
+        <Label htmlFor="name">{t('register.name_label')}</Label>
         <div className="relative">
           <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             id="name"
             type="text"
-            placeholder="Tu nombre"
+            placeholder={t('register.name_placeholder')}
             className={cn("pl-10", errors.name && "border-destructive")}
             disabled={is_loading}
             {...register("name")}
@@ -89,13 +93,13 @@ export function RegisterForm({ on_submit, is_loading, error }: RegisterFormProps
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{t('register.email_label')}</Label>
         <div className="relative">
           <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             id="email"
             type="email"
-            placeholder="tu@email.com"
+            placeholder={t('register.email_placeholder')}
             className={cn("pl-10", errors.email && "border-destructive")}
             disabled={is_loading}
             {...register("email")}
@@ -107,7 +111,7 @@ export function RegisterForm({ on_submit, is_loading, error }: RegisterFormProps
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="password">Contraseña</Label>
+        <Label htmlFor="password">{t('register.password_label')}</Label>
         <div className="relative">
           <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -137,7 +141,7 @@ export function RegisterForm({ on_submit, is_loading, error }: RegisterFormProps
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="confirm_password">Confirmar contraseña</Label>
+        <Label htmlFor="confirm_password">{t('register.confirm_password_label')}</Label>
         <div className="relative">
           <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -175,17 +179,17 @@ export function RegisterForm({ on_submit, is_loading, error }: RegisterFormProps
         {is_loading ? (
           <>
             <Spinner size="sm" className="border-white/30 border-t-white" />
-            Creando cuenta...
+            {t('register.submit_loading')}
           </>
         ) : (
-          "Crear cuenta"
+          t('register.submit')
         )}
       </Button>
 
       <p className="text-center text-sm text-muted-foreground">
-        ¿Ya tienes cuenta?{" "}
+        {t('register.has_account')}{" "}
         <Link to="/login" className="font-medium text-primary hover:underline">
-          Inicia sesión
+          {t('register.login_link')}
         </Link>
       </p>
     </form>

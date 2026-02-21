@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   CheckCircle,
   XCircle,
@@ -135,6 +136,7 @@ function Confetti() {
 // Main component
 // ============================================
 export function TestResultsPage() {
+  const { t } = useTranslation('tests');
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const navigate = useNavigate();
@@ -176,14 +178,14 @@ export function TestResultsPage() {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
           <p className="text-muted-foreground">
-            No se encontraron resultados
+            {t('results.no_results')}
           </p>
           <Button
             variant="outline"
             className="mt-4"
             onClick={() => navigate("/tests")}
           >
-            Volver a tests
+            {t('results.back')}
           </Button>
         </div>
       </div>
@@ -238,10 +240,10 @@ export function TestResultsPage() {
 
   const handle_impugn_submit = () => {
     if (!impugn_reason) {
-      toast.error("Selecciona un motivo para la impugnación");
+      toast.error(t('results.toast_impugn_no_reason'));
       return;
     }
-    toast.success("Impugnación enviada correctamente");
+    toast.success(t('results.toast_impugn_success'));
     set_impugn_question_id(null);
     set_impugn_reason("");
     set_impugn_argument("");
@@ -249,10 +251,10 @@ export function TestResultsPage() {
 
   const handle_doubt_submit = () => {
     if (!doubt_text.trim()) {
-      toast.error("Escribe tu duda antes de enviar");
+      toast.error(t('results.toast_doubt_empty'));
       return;
     }
-    toast.success("Duda enviada correctamente");
+    toast.success(t('results.toast_doubt_success'));
     set_doubt_question_id(null);
     set_doubt_text("");
   };
@@ -272,7 +274,7 @@ export function TestResultsPage() {
         className="mb-6 gap-1"
       >
         <ArrowLeft className="h-4 w-4" />
-        Volver a tests
+        {t('results.back')}
       </Button>
 
       {/* Result summary card */}
@@ -317,7 +319,7 @@ export function TestResultsPage() {
                 {result.score}%
               </span>
               <span className="text-xs text-muted-foreground">
-                puntuación
+                {t('results.score_label')}
               </span>
             </div>
           </div>
@@ -325,7 +327,7 @@ export function TestResultsPage() {
           {/* Result details */}
           <div className="flex-1 text-center sm:text-left">
             <h1 className="text-2xl font-bold text-foreground mb-1">
-              {result.passed ? "Test Aprobado" : "Test No Superado"}
+              {result.passed ? t('results.passed') : t('results.failed')}
             </h1>
             <p className="text-muted-foreground mb-4">
               {result.test_name}
@@ -335,19 +337,19 @@ export function TestResultsPage() {
               <div className="flex items-center gap-1">
                 <CheckCircle className="h-4 w-4 text-test-correct" />
                 <span className="font-medium">
-                  {result.correct_count} correctas
+                  {t('results.correct', { count: result.correct_count })}
                 </span>
               </div>
               <div className="flex items-center gap-1">
                 <XCircle className="h-4 w-4 text-test-incorrect" />
                 <span className="font-medium">
-                  {result.incorrect_count} incorrectas
+                  {t('results.incorrect', { count: result.incorrect_count })}
                 </span>
               </div>
               {result.unanswered_count > 0 && (
                 <div className="flex items-center gap-1 text-test-unanswered">
                   <span className="w-4 h-4 rounded-full border-2 border-current" />
-                  <span>{result.unanswered_count} sin responder</span>
+                  <span>{t('results.unanswered', { count: result.unanswered_count })}</span>
                 </div>
               )}
               <div className="flex items-center gap-1 text-muted-foreground">
@@ -388,13 +390,13 @@ export function TestResultsPage() {
             <div className="flex items-center gap-2 mb-3">
               <Users className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm font-medium text-foreground">
-                Comparación con la media
+                {t('results.average_title')}
               </span>
             </div>
             <div className="flex items-end gap-4">
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-muted-foreground">Tu puntuación</span>
+                  <span className="text-xs text-muted-foreground">{t('results.your_score')}</span>
                   <span
                     className={cn(
                       "text-sm font-bold",
@@ -416,7 +418,7 @@ export function TestResultsPage() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-muted-foreground">Media</span>
+                  <span className="text-xs text-muted-foreground">{t('results.average')}</span>
                   <span className="text-sm font-bold text-muted-foreground">
                     {result.average_score}%
                   </span>
@@ -431,10 +433,10 @@ export function TestResultsPage() {
             </div>
             <p className="text-xs text-muted-foreground mt-2">
               {result.score > result.average_score
-                ? `Estás ${result.score - result.average_score} puntos por encima de la media`
+                ? t('results.above_average', { points: result.score - result.average_score })
                 : result.score < result.average_score
-                  ? `Estás ${result.average_score - result.score} puntos por debajo de la media`
-                  : "Tu puntuación coincide con la media"}
+                  ? t('results.below_average', { points: result.average_score - result.score })
+                  : t('results.equal_average')}
             </p>
           </div>
         )}
@@ -447,11 +449,11 @@ export function TestResultsPage() {
             className="gap-1"
           >
             <RotateCcw className="h-4 w-4" />
-            Repetir test
+            {t('results.retry')}
           </Button>
           <Button variant="outline" className="gap-1">
             <Share2 className="h-4 w-4" />
-            Compartir
+            {t('results.share')}
           </Button>
           <Button
             variant="outline"
@@ -459,7 +461,7 @@ export function TestResultsPage() {
             className="gap-1"
           >
             <Shuffle className="h-4 w-4" />
-            Nuevo test aleatorio
+            {t('results.random_test')}
           </Button>
           <Button
             variant="outline"
@@ -467,7 +469,7 @@ export function TestResultsPage() {
             className="gap-1"
           >
             <Home className="h-4 w-4" />
-            Volver al menú
+            {t('results.go_home')}
           </Button>
         </div>
       </div>
@@ -494,13 +496,13 @@ export function TestResultsPage() {
                   <p className="text-2xl font-bold text-foreground">
                     {animated_points}
                   </p>
-                  <p className="text-xs text-muted-foreground">puntos</p>
+                  <p className="text-xs text-muted-foreground">{t('results.points')}</p>
                   {gamification.points_breakdown.length > 0 && (
                     <button
                       onClick={() => set_show_breakdown(!show_breakdown)}
                       className="text-xs text-[var(--color-brand-primary)] hover:underline mt-1"
                     >
-                      {show_breakdown ? "Ocultar" : "Ver detalle"}
+                      {show_breakdown ? t('results.hide_detail') : t('results.show_detail')}
                     </button>
                   )}
                 </div>
@@ -513,7 +515,7 @@ export function TestResultsPage() {
                   <p className="text-2xl font-bold text-foreground">
                     {gamification.coins_earned}
                   </p>
-                  <p className="text-xs text-muted-foreground">monedas</p>
+                  <p className="text-xs text-muted-foreground">{t('results.coins')}</p>
                 </div>
 
                 {/* Streak */}
@@ -531,11 +533,11 @@ export function TestResultsPage() {
                     {gamification.streak_count}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    días de racha
+                    {t('results.streak_days')}
                   </p>
                   {gamification.streak_is_new_record && (
                     <span className="inline-block mt-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[var(--color-brand-primary)] text-white">
-                      RÉCORD
+                      {t('results.record')}
                     </span>
                   )}
                 </div>
@@ -567,10 +569,10 @@ export function TestResultsPage() {
                         : "text-muted-foreground"
                     )}
                   >
-                    {gamification.first_test_today_bonus ? "Bonus" : "—"}
+                    {gamification.first_test_today_bonus ? t('results.bonus') : t('results.no_bonus')}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    1er test del día
+                    {t('results.first_test_bonus')}
                   </p>
                 </div>
               </div>
@@ -589,7 +591,7 @@ export function TestResultsPage() {
                       </li>
                     ))}
                     <li className="flex items-center justify-between text-sm font-bold text-foreground pt-1 border-t">
-                      <span>Total</span>
+                      <span>{t('results.total')}</span>
                       <span>+{gamification.points_earned}</span>
                     </li>
                   </ul>
@@ -605,15 +607,15 @@ export function TestResultsPage() {
       <div className="mb-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
           <h2 className="text-xl font-bold text-foreground">
-            Revisión de respuestas
+            {t('results.review_title')}
           </h2>
 
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm" onClick={expand_all}>
-              Expandir todo
+              {t('results.expand_all')}
             </Button>
             <Button variant="ghost" size="sm" onClick={collapse_all}>
-              Colapsar todo
+              {t('results.collapse_all')}
             </Button>
           </div>
         </div>
@@ -622,11 +624,11 @@ export function TestResultsPage() {
         <div className="flex flex-wrap gap-2 mb-6">
           {(
             [
-              { key: "all", label: "Todas", count: result.total_questions },
-              { key: "correct", label: "Correctas", count: result.correct_count },
-              { key: "incorrect", label: "Incorrectas", count: result.incorrect_count },
-              { key: "unanswered", label: "Sin responder", count: result.unanswered_count },
-            ] as const
+              { key: "all" as const, label: t('results.filter_all'), count: result.total_questions },
+              { key: "correct" as const, label: t('results.filter_correct'), count: result.correct_count },
+              { key: "incorrect" as const, label: t('results.filter_incorrect'), count: result.incorrect_count },
+              { key: "unanswered" as const, label: t('results.filter_unanswered'), count: result.unanswered_count },
+            ]
           ).map((f) => (
             <Button
               key={f.key}
@@ -712,7 +714,7 @@ export function TestResultsPage() {
                     {qr.question.justification && (
                       <div className="mt-4 p-4 bg-muted/50 rounded-lg border">
                         <h4 className="font-medium text-foreground mb-2">
-                          Justificación
+                          {t('results.justification')}
                         </h4>
                         <p className="text-sm text-muted-foreground">
                           {qr.question.justification}
@@ -729,7 +731,7 @@ export function TestResultsPage() {
                         onClick={() => set_impugn_question_id(qr.question_id)}
                       >
                         <Flame className="h-3.5 w-3.5" />
-                        Impugnar
+                        {t('results.impugn')}
                       </Button>
                       <Button
                         variant="outline"
@@ -738,7 +740,7 @@ export function TestResultsPage() {
                         onClick={() => set_doubt_question_id(qr.question_id)}
                       >
                         <HelpCircle className="h-3.5 w-3.5" />
-                        Duda
+                        {t('results.doubt')}
                       </Button>
                     </div>
                   </div>
@@ -755,7 +757,7 @@ export function TestResultsPage() {
             className="w-full mt-4"
             onClick={() => set_show_all_questions(true)}
           >
-            Mostrar todas las preguntas ({filtered_questions.length - 5} más)
+            {t('results.show_all', { count: filtered_questions.length - 5 })}
           </Button>
         )}
       </div>
@@ -773,34 +775,34 @@ export function TestResultsPage() {
       >
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Impugnar pregunta</DialogTitle>
+            <DialogTitle>{t('results.impugn_title')}</DialogTitle>
             <DialogDescription>
-              Indica el motivo de la impugnación y tu argumento.
+              {t('results.impugn_description')}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div className="space-y-2">
-              <Label>Motivo</Label>
+              <Label>{t('results.impugn_reason_label')}</Label>
               <Select value={impugn_reason} onValueChange={set_impugn_reason}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Selecciona un motivo..." />
+                  <SelectValue placeholder={t('results.impugn_reason_placeholder')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="respuesta_incorrecta">La respuesta correcta es incorrecta</SelectItem>
-                  <SelectItem value="pregunta_ambigua">La pregunta es ambigua</SelectItem>
-                  <SelectItem value="contenido_obsoleto">Contenido obsoleto o derogado</SelectItem>
-                  <SelectItem value="multiples_correctas">Hay varias respuestas correctas</SelectItem>
-                  <SelectItem value="otro">Otro motivo</SelectItem>
+                  <SelectItem value="respuesta_incorrecta">{t('results.impugn_reason_incorrect')}</SelectItem>
+                  <SelectItem value="pregunta_ambigua">{t('results.impugn_reason_ambiguous')}</SelectItem>
+                  <SelectItem value="contenido_obsoleto">{t('results.impugn_reason_obsolete')}</SelectItem>
+                  <SelectItem value="multiples_correctas">{t('results.impugn_reason_multiple')}</SelectItem>
+                  <SelectItem value="otro">{t('results.impugn_reason_other')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="impugn-argument">Argumento (opcional)</Label>
+              <Label htmlFor="impugn-argument">{t('results.impugn_argument_label')}</Label>
               <textarea
                 id="impugn-argument"
                 value={impugn_argument}
                 onChange={(e) => set_impugn_argument(e.target.value)}
-                placeholder="Explica tu argumento..."
+                placeholder={t('results.impugn_argument_placeholder')}
                 rows={3}
                 className="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring resize-none"
               />
@@ -808,9 +810,9 @@ export function TestResultsPage() {
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancelar</Button>
+              <Button variant="outline">{t('results.cancel')}</Button>
             </DialogClose>
-            <Button onClick={handle_impugn_submit}>Enviar impugnación</Button>
+            <Button onClick={handle_impugn_submit}>{t('results.impugn_submit')}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -827,19 +829,19 @@ export function TestResultsPage() {
       >
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Plantear duda</DialogTitle>
+            <DialogTitle>{t('results.doubt_title')}</DialogTitle>
             <DialogDescription>
-              Describe tu duda sobre esta pregunta.
+              {t('results.doubt_description')}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div className="space-y-2">
-              <Label htmlFor="doubt-text">Tu duda</Label>
+              <Label htmlFor="doubt-text">{t('results.doubt_label')}</Label>
               <textarea
                 id="doubt-text"
                 value={doubt_text}
                 onChange={(e) => set_doubt_text(e.target.value)}
-                placeholder="Escribe tu duda aquí..."
+                placeholder={t('results.doubt_placeholder')}
                 rows={4}
                 className="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring resize-none"
               />
@@ -847,9 +849,9 @@ export function TestResultsPage() {
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancelar</Button>
+              <Button variant="outline">{t('results.cancel')}</Button>
             </DialogClose>
-            <Button onClick={handle_doubt_submit}>Enviar duda</Button>
+            <Button onClick={handle_doubt_submit}>{t('results.doubt_submit')}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

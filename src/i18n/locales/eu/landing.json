@@ -1,0 +1,185 @@
+{
+  "hero": {
+    "badge": "Oposizioak gamifikazioarekin",
+    "title_line1": "Utzi itsuan",
+    "title_line2": "ikasteari.",
+    "description": "12.000 galdera ofizial. Gaika analitika. Eguneroko errondak. Liga lehiakorrak. Zure",
+    "description_highlight": "oposizioa gainditzeko diseinatutako sistema",
+    "cta_primary": "Orain hasi",
+    "cta_secondary": "Kontua daukat dagoeneko",
+    "check_questions": "12.000+ galdera ofizial",
+    "check_analytics": "Gaika analitika",
+    "check_streaks": "Errondak eta ligak",
+    "hero_alt": "Oposizioen prestakuntza Postal3-rekin"
+  },
+  "metrics": {
+    "questions_value": "12.847",
+    "questions_label": "Galdera ofizial",
+    "users_value": "2.400+",
+    "users_label": "Opositore aktibo",
+    "pass_rate_value": "85%",
+    "pass_rate_label": "Gainditu-tasa",
+    "satisfaction_value": "4,8★",
+    "satisfaction_label": "Batez besteko gogobetetasuna"
+  },
+  "features": {
+    "section_label": "Funtzionalitateak",
+    "title_line1": "Gainditzeko diseinatuta,",
+    "title_line2": "ez gehiago ikasteko.",
+    "tests_title": "Gaika test ofizialak",
+    "tests_description": "Aurreko deialdietako benetako galderak, gai eta zailtasun arabera antolatuta. Zure azterketan sartzen dena zehatz-mehatz praktikatu.",
+    "tests_tags": ["Constitución", "Ley 39/2015", "EBEP", "Ley 40/2015", "Procedimiento"],
+    "elo_title": "ELO Sistema",
+    "elo_description": "Zure benetako maila islatzen duen rating objektiboa, egiten duzun test bakoitzarekin.",
+    "streaks_title": "Eguneroko errondak",
+    "streaks_description": "Mantendu ohitura erronden, mugarrien eta iraunkortasuna saritzen duten sarien bidez.",
+    "analytics_title": "Analitika zehatza",
+    "analytics_description": "Identifikatu gai ahulak. Neurtu zure aurrerapena. Optimizatu zure ikasketa-plana datu errealekin.",
+    "leagues_title": "Asteko ligak",
+    "leagues_description": "Lehiatu zure mailako opositoreenkin. Igo liga astero iraunkortasuna erakutsiz."
+  },
+  "how_it_works": {
+    "section_label": "Nola funtzionatzen du",
+    "title": "Zerotik ikasten 2 minututan",
+    "step1_title": "Aukeratu zure oposizioa",
+    "step1_description": "Auxiliar, Administrativo, Tramitación, Auxilio Judicial edo Correos. Aukeratu eta hasteko prest.",
+    "step2_title": "Egin tests egunero",
+    "step2_description": "Benetako azterketetako galderak. Erantzun azalduak. Markatu zailak berrikusteko.",
+    "step3_title": "Neurtu eta lehiatu",
+    "step3_description": "Gaika analitika, ELO rating-a, asteko ligak. Zehazki non zauden jakingo duzu."
+  },
+  "testimonials": {
+    "section_label": "Testigantzak",
+    "title": "Gure opositoreek esaten dutena",
+    "featured_text": "Errondek ikasteko modua aldatu didate. Lehen egun gutxiren buruan uzten nuen prestatzeari. Orain 45 egun daramatzat jarraian huts egin gabe. Analitikak erakutsi zidan Administrazio Prozedura gaian huts egiten nuela beti — horra bideratu nuen errepasoa eta hilabetean %20 igo nuen.",
+    "featured_name": "Laura Martínez",
+    "featured_role": "Auxiliar Administrativo — 2025ean gainditu zuen",
+    "testimonial1_text": "Liga-sistemak asko motibatzen nau. Beste opositoreenkin lehiatzeak ikastea askoz ere aspergarriagoa ez izatea lortzen du. Oro ligara igo naiz 3 astetan.",
+    "testimonial1_name": "Carmen Rodríguez",
+    "testimonial1_role": "Tramitación Procesal",
+    "testimonial2_text": "Niretzat gakoa analitika izan zen. Beti gai berdinetan huts egiten nuela aurkitu nuen. Errepasoa bideratu nuen eta lehen deialdian gainditu nuen.",
+    "testimonial2_name": "Ana García",
+    "testimonial2_role": "Administrativo del Estado"
+  },
+  "faq": {
+    "section_label": "FAQ",
+    "title_line1": "Ohiko",
+    "title_line2": "galderak",
+    "contact_text": "Beste zalantzarik baduzu, idatzi guri hona:",
+    "q1": "Zenbat balio du?",
+    "a1": "Kontsultatu gure webean dauden planak. Hainbat aukera eskaintzen ditugu zuretzat ondoen egokitzen dena aukera dezazun.",
+    "q2": "Zein oposizio daude eskuragarri?",
+    "a2": "Auxiliar Administrativo del Estado, Administrativo del Estado, Tramitación Procesal, Auxilio Judicial eta Correos y Telégrafos.",
+    "q3": "Galderak benetako azterketetatik datoz?",
+    "a3": "Bai. Galdera-bankua aurreko deialdi ofizialetako galderez osatuta dago, gure taldeak berrikusi eta eguneratuta.",
+    "q4": "Nola funtzionatzen du liga-sistemak?",
+    "a4": "Astero zure mailako opositoreenkin lehiatzen zara. Onenak igotzen dira (Bronce → Plata → Oro → Diamante) eta gutxien praktikatzen dutenak jaisten dira.",
+    "q5": "Mugikorrean funtzionatzen du?",
+    "a5": "Bai. Plataforma %100 responsive da eta web nabigatzailea duen edozein gailutan funtzionatzen du."
+  },
+  "cta": {
+    "title": "Zure plaza zain dago.",
+    "description": "Ikasten ez duzun egun bakoitza zure helburutik urruntzen zaituen egun bat da. Hasi orain eta batu zaitez Postal3-n konfiantza duten milaka opositoreengana.",
+    "register": "Kontua sortu",
+    "login": "Nire kontura sartu"
+  },
+  "dashboard": {
+    "oposicion": "Auxiliar Administrativo del Estado",
+    "greeting": "Kaixo, {{name}}",
+    "streak_days": "{{days}} egun",
+    "streak_info_prefix": "",
+    "streak_info_middle": " eguneko erronda eta %",
+    "streak_info_suffix": "ko zehaztasuna daramazu.",
+    "keep_going": "Jarraitu horrela.",
+    "start_test": "Test-a hasi",
+    "available_tests": "Tests erabilgarriak",
+    "view_all": "Denak ikusi",
+    "review": "Berrikusi",
+    "questions_count": "{{count}} galdera",
+    "recent_results": "Azken emaitzak",
+    "today": "Gaur",
+    "yesterday": "Atzo",
+    "league_name": "Plata Liga",
+    "league_points_needed": "{{points}} pts Oro Ligarako",
+    "stats_tests": "Tests",
+    "stats_streak": "Erronda",
+    "stats_accuracy": "Zehaztasuna"
+  },
+  "coach": {
+    "app_entry": [
+      {
+        "title": "Ongi etorri berriro",
+        "body": "Kaixo {user_name}, iraunkortasuna da arrakastaren giltza. Eskaini gutxienez 15 minutu gaur zure gai pendienteak berrikusteko.",
+        "action": "Test-a hasi"
+      },
+      {
+        "title": "Egun bat gehiago, urrats bat gehiago",
+        "body": "Ikasketa-saio bakoitzak zure plazara hurbiltzen zaitu, {user_name}. Gaur egun ona da zure mugak gainditzeko.",
+        "action": "Tests ikusi"
+      },
+      {
+        "title": "Zure coach-ak agurtzen zaitu",
+        "body": "Kaixo {user_name}, gogoratu eguneroko prestakuntzak egiten duela aldea gainditzea eta hurbil geratzea artean. Goazen harira.",
+        "action": "Praktikatzera joan"
+      }
+    ],
+    "auto_test": [
+      {
+        "title": "Test pertsonalizatua prest",
+        "body": "Zure hobetzeko arloetan oinarrituta, {topic} gaiko {test_count} galderako test-a sortu dut. Zaila praktikatzea da benetan prestatzen zaituena.",
+        "action": "Test-a egin"
+      },
+      {
+        "title": "Errepaso adimentsua",
+        "body": "{topic} gaiko test berri bat duzu, zure puntu ahulak indartzeko hautatutako {test_count} galderekin.",
+        "action": "Orain hasi"
+      }
+    ],
+    "daily_limit": [
+      {
+        "title": "Eguneroko muga iritsi da",
+        "body": "Gaur {points} puntutara iritsi zara. Atsedena ere ikasketaren parte da. Itzuli bihar buru argiarekin."
+      },
+      {
+        "title": "Ikasketa-saio bikaina",
+        "body": "Esfortzu izugarria gaur, {user_name}. {points} puntuko mugara iritsi zara. Zure garunak ikasitako guztia prozesatu behar du, bihar arte."
+      }
+    ],
+    "post_test_high": [
+      {
+        "title": "Emaitza bikaina",
+        "body": "%{score} {topic} gaian — {total_questions}(e)tik {correct_count} zuzen. Menderatze sendoa erakusten ari zara. Jarraitu horrela eta plaza zurea izango da.",
+        "action": "Praktikatzen jarraitu"
+      },
+      {
+        "title": "Zoragarria, {user_name}",
+        "body": "%{score} lortu duzu {topic} gaian. Prestakuntza-maila hau da benetako azterketan aldea egiten duena.",
+        "action": "Beste test bat"
+      }
+    ],
+    "post_test_mid": [
+      {
+        "title": "Lan ona",
+        "body": "%{score} {topic} gaian — bide onetik zoaz. Berrikusi huts egin dituzun {incorrect_count} galderak eta azkar igoko duzu.",
+        "action": "Hutsak berrikusi"
+      },
+      {
+        "title": "Aurrerapen iraunkorra",
+        "body": "{topic} gaian {total_questions}(e)tik {correct_count} zuzen. Saiakera bakoitzak hurbilago jartzen zaitu. Berrikusi erroreak eta errepikatu test-a prest zaudenean.",
+        "action": "Tests ikusi"
+      }
+    ],
+    "post_test_low": [
+      {
+        "title": "Ez etsi",
+        "body": "%{score} {topic} gaian abiapuntu bat da. Berrikusi galdera bakoitzaren azalpenak eta saiatu berriro. Iraunkortasuna da zure tresnarik onena.",
+        "action": "Gaia berrikusi"
+      },
+      {
+        "title": "Saiatzen jarraitu",
+        "body": "{topic} gaiko emaitza honek non indartu behar duzun erakusten dizu. Eskaini denbora errepasoan eta ikusiko duzu nola hobetzen duzun hurrengo saiakeran.",
+        "action": "Indartzeko test-a"
+      }
+    ]
+  }
+}

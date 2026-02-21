@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Menu, X, Bell, Mail, User, ShoppingCart, LogOut, ChevronDown, GraduationCap } from 'lucide-react'
 import {
   DropdownMenu,
@@ -24,12 +25,6 @@ interface NavbarProps {
   on_logout?: () => void
 }
 
-const NAV_LINKS = [
-  { href: '/tests', label: 'Tests' },
-  { href: '/myspace/account', label: 'Mi Espacio' },
-  { href: '/design-system', label: 'Design System' },
-]
-
 export function Navbar({
   user,
   notifications_count = 0,
@@ -37,8 +32,15 @@ export function Navbar({
   cart_items = 0,
   on_logout
 }: NavbarProps) {
+  const { t } = useTranslation()
   const [mobile_open, set_mobile_open] = useState(false)
   const location = useLocation()
+
+  const NAV_LINKS = [
+    { href: '/tests', label: t('nav.tests') },
+    { href: '/myspace/account', label: t('nav.my_space') },
+    { href: '/design-system', label: t('nav.design_system') },
+  ]
 
   const is_active = (href: string) => location.pathname.startsWith(href)
 
@@ -104,7 +106,7 @@ export function Navbar({
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-72 rounded-xl p-2">
                     <div className="px-3 py-2 text-sm font-semibold text-foreground">
-                      Notificaciones
+                      {t('notifications.title')}
                       {notifications_count > 0 && (
                         <span className="ml-2 px-2 py-0.5 text-xs font-medium rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400">
                           {notifications_count}
@@ -115,7 +117,7 @@ export function Navbar({
                     <DropdownMenuItem asChild className="rounded-lg cursor-pointer">
                       <Link to="/myspace/alerts" className="flex items-center gap-2">
                         <Bell className="w-4 h-4 text-muted-foreground" />
-                        Ver todas las alertas
+                        {t('notifications.view_all')}
                       </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -168,7 +170,7 @@ export function Navbar({
                       <DropdownMenuItem asChild className="rounded-lg cursor-pointer">
                         <Link to="/myspace" className="flex items-center gap-2">
                           <User className="w-4 h-4 text-muted-foreground" />
-                          Mi espacio
+                          {t('user_menu.my_space')}
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
@@ -177,7 +179,7 @@ export function Navbar({
                         className="rounded-lg cursor-pointer text-rose-600 focus:text-rose-600 focus:bg-rose-50 dark:focus:bg-rose-950/30"
                       >
                         <LogOut className="w-4 h-4 mr-2" />
-                        Cerrar sesión
+                        {t('actions.logout')}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -187,13 +189,13 @@ export function Navbar({
                       to="/login"
                       className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      Iniciar sesión
+                      {t('actions.login')}
                     </Link>
                     <Link
                       to="/register"
                       className="px-4 py-2 text-sm font-semibold text-white bg-violet-600 hover:bg-violet-700 rounded-lg transition-colors"
                     >
-                      Registrarse
+                      {t('actions.register')}
                     </Link>
                   </div>
                 )}
@@ -255,7 +257,7 @@ export function Navbar({
                       className="block px-4 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted"
                       onClick={() => set_mobile_open(false)}
                     >
-                      Mi espacio
+                      {t('user_menu.my_space')}
                     </Link>
                     <button
                       onClick={() => {
@@ -264,7 +266,7 @@ export function Navbar({
                       }}
                       className="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30"
                     >
-                      Cerrar sesión
+                      {t('actions.logout')}
                     </button>
                   </div>
                 ) : (
@@ -274,14 +276,14 @@ export function Navbar({
                       className="py-2.5 text-center text-sm font-semibold text-white bg-violet-600 rounded-lg"
                       onClick={() => set_mobile_open(false)}
                     >
-                      Registrarse
+                      {t('actions.register')}
                     </Link>
                     <Link
                       to="/login"
                       className="py-2.5 text-center text-sm font-medium text-muted-foreground rounded-lg border border-border hover:bg-muted"
                       onClick={() => set_mobile_open(false)}
                     >
-                      Iniciar sesión
+                      {t('actions.login')}
                     </Link>
                   </div>
                 )}

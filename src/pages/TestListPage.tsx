@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { Search, Filter, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import { test_service } from "@/services/test-service";
 import type { TestFilters, TestStatus } from "@/types/test";
 
 export function TestListPage() {
+  const { t } = useTranslation('tests');
   const [filters, set_filters] = useState<TestFilters>({
     search: "",
     status: "all",
@@ -53,10 +55,10 @@ export function TestListPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground">
-          Tests Disponibles
+          {t('list.title')}
         </h1>
         <p className="mt-2 text-muted-foreground">
-          Selecciona un test para comenzar tu preparación
+          {t('list.description')}
         </p>
       </div>
 
@@ -66,7 +68,7 @@ export function TestListPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             type="text"
-            placeholder="Buscar tests..."
+            placeholder={t('list.search_placeholder')}
             value={filters.search}
             onChange={(e) => handle_search(e.target.value)}
             className="pl-10"
@@ -89,13 +91,13 @@ export function TestListPage() {
               onValueChange={handle_status_change}
             >
               <SelectTrigger className="w-[140px]">
-                <SelectValue placeholder="Estado" />
+                <SelectValue placeholder={t('list.filter_status')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todos</SelectItem>
-                <SelectItem value="pending">Pendientes</SelectItem>
-                <SelectItem value="passed">Aprobados</SelectItem>
-                <SelectItem value="failed">Suspendidos</SelectItem>
+                <SelectItem value="all">{t('list.filter_all')}</SelectItem>
+                <SelectItem value="pending">{t('list.filter_pending')}</SelectItem>
+                <SelectItem value="passed">{t('list.filter_passed')}</SelectItem>
+                <SelectItem value="failed">{t('list.filter_failed')}</SelectItem>
               </SelectContent>
             </Select>
 
@@ -104,16 +106,16 @@ export function TestListPage() {
               onValueChange={handle_sort_change}
             >
               <SelectTrigger className="w-[160px]">
-                <SelectValue placeholder="Ordenar por" />
+                <SelectValue placeholder={t('list.sort_by')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="name-asc">Nombre A-Z</SelectItem>
-                <SelectItem value="name-desc">Nombre Z-A</SelectItem>
+                <SelectItem value="name-asc">{t('list.sort_name_asc')}</SelectItem>
+                <SelectItem value="name-desc">{t('list.sort_name_desc')}</SelectItem>
                 <SelectItem value="question_count-asc">
-                  Menos preguntas
+                  {t('list.sort_questions_asc')}
                 </SelectItem>
                 <SelectItem value="question_count-desc">
-                  Más preguntas
+                  {t('list.sort_questions_desc')}
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -126,7 +128,7 @@ export function TestListPage() {
         <div className="flex items-center justify-center py-16">
           <Loader2 className="h-8 w-8 animate-spin text-violet-600" />
           <span className="ml-3 text-muted-foreground">
-            Cargando tests...
+            {t('list.loading')}
           </span>
         </div>
       )}
@@ -135,14 +137,14 @@ export function TestListPage() {
       {isError && (
         <div className="text-center py-16">
           <p className="text-red-600 dark:text-red-400">
-            Error al cargar los tests: {(error as Error)?.message}
+            {t('list.error')} {(error as Error)?.message}
           </p>
           <Button
             variant="outline"
             className="mt-4"
             onClick={() => window.location.reload()}
           >
-            Reintentar
+            {t('list.retry')}
           </Button>
         </div>
       )}
@@ -151,11 +153,11 @@ export function TestListPage() {
       {!isLoading && data?.data.length === 0 && (
         <div className="text-center py-16">
           <p className="text-muted-foreground text-lg">
-            No se encontraron tests
+            {t('list.empty')}
           </p>
           {filters.search && (
             <p className="text-muted-foreground mt-2">
-              Intenta con otros términos de búsqueda
+              {t('list.empty_search')}
             </p>
           )}
         </div>
@@ -186,7 +188,7 @@ export function TestListPage() {
       {/* Pagination info */}
       {data && data.total > 0 && (
         <div className="mt-8 text-center text-sm text-muted-foreground">
-          Mostrando {data.data.length} de {data.total} tests
+          {t('list.showing', { shown: data.data.length, total: data.total })}
         </div>
       )}
     </div>

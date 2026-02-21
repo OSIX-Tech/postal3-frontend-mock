@@ -1,3 +1,4 @@
+import i18n from "@/i18n/config";
 import type { CoachContext, CoachMessage, CoachTrigger } from "@/types/coach";
 
 interface MessageTemplate {
@@ -7,103 +8,77 @@ interface MessageTemplate {
   action?: CoachMessage["action"];
 }
 
-const TEMPLATES: Record<CoachTrigger, MessageTemplate[]> = {
-  app_entry: [
-    {
-      title: "Bienvenida de vuelta",
-      body: "Hola {user_name}, la constancia es la clave del exito. Dedica aunque sea 15 minutos hoy a repasar tus temas pendientes.",
-      emotion: "happy",
-      action: { label: "Empezar test", to: "/tests" },
-    },
-    {
-      title: "Un dia mas, un paso mas",
-      body: "Cada sesion de estudio te acerca a tu plaza, {user_name}. Hoy es un buen dia para superar tus limites.",
-      emotion: "encouraging",
-      action: { label: "Ver tests", to: "/tests" },
-    },
-    {
-      title: "Tu coach te saluda",
-      body: "Hola {user_name}, recuerda que la preparacion diaria marca la diferencia entre aprobar y quedarse cerca. Vamos a por ello.",
-      emotion: "idle",
-      action: { label: "Ir a practicar", to: "/tests" },
-    },
-  ],
+interface I18nCoachEntry {
+  title: string;
+  body: string;
+  action?: string;
+}
 
-  post_test: [],
+function get_app_entry_templates(): MessageTemplate[] {
+  const msgs = i18n.t("coach.app_entry", { ns: "landing", returnObjects: true }) as I18nCoachEntry[];
+  const emotions: CoachMessage["emotion"][] = ["happy", "encouraging", "idle"];
+  return msgs.map((msg, i) => ({
+    title: msg.title,
+    body: msg.body,
+    emotion: emotions[i] ?? "idle",
+    action: msg.action ? { label: msg.action, to: "/tests" } : undefined,
+  }));
+}
 
-  auto_generated_test: [
-    {
-      title: "Test personalizado listo",
-      body: "He generado un test de {test_count} preguntas sobre {topic} basado en tus areas de mejora. Practicar lo dificil es lo que realmente te prepara.",
-      emotion: "encouraging",
-      action: { label: "Hacer test", to: "/tests" },
-    },
-    {
-      title: "Repaso inteligente",
-      body: "Tienes un nuevo test de {topic} con {test_count} preguntas seleccionadas para reforzar tus puntos debiles.",
-      emotion: "idle",
-      action: { label: "Empezar ahora", to: "/tests" },
-    },
-  ],
+function get_auto_test_templates(): MessageTemplate[] {
+  const msgs = i18n.t("coach.auto_test", { ns: "landing", returnObjects: true }) as I18nCoachEntry[];
+  const emotions: CoachMessage["emotion"][] = ["encouraging", "idle"];
+  return msgs.map((msg, i) => ({
+    title: msg.title,
+    body: msg.body,
+    emotion: emotions[i] ?? "idle",
+    action: msg.action ? { label: msg.action, to: "/tests" } : undefined,
+  }));
+}
 
-  daily_point_limit: [
-    {
-      title: "Limite diario alcanzado",
-      body: "Has llegado a {points} puntos hoy. Descansar tambien es parte del estudio. Vuelve manana con la mente fresca.",
-      emotion: "happy",
-    },
-    {
-      title: "Gran sesion de estudio",
-      body: "Increible esfuerzo hoy, {user_name}. Has alcanzado el limite de {points} puntos. Tu cerebro necesita procesar todo lo aprendido, nos vemos manana.",
-      emotion: "celebrating",
-    },
-  ],
-};
+function get_daily_limit_templates(): MessageTemplate[] {
+  const msgs = i18n.t("coach.daily_limit", { ns: "landing", returnObjects: true }) as I18nCoachEntry[];
+  const emotions: CoachMessage["emotion"][] = ["happy", "celebrating"];
+  return msgs.map((msg, i) => ({
+    title: msg.title,
+    body: msg.body,
+    emotion: emotions[i] ?? "happy",
+    action: msg.action ? { label: msg.action, to: "/tests" } : undefined,
+  }));
+}
 
-const POST_TEST_HIGH: MessageTemplate[] = [
-  {
-    title: "Resultado excelente",
-    body: "Un {score}% en {topic} — {correct_count} de {total_questions} correctas. Estas demostrando un dominio solido. Sigue asi y la plaza es tuya.",
-    emotion: "celebrating",
-    action: { label: "Seguir practicando", to: "/tests" },
-  },
-  {
-    title: "Fantastico, {user_name}",
-    body: "Has conseguido un {score}% en {topic}. Este nivel de preparacion es el que marca la diferencia en el examen real.",
-    emotion: "happy",
-    action: { label: "Otro test", to: "/tests" },
-  },
-];
+function get_post_test_high_templates(): MessageTemplate[] {
+  const msgs = i18n.t("coach.post_test_high", { ns: "landing", returnObjects: true }) as I18nCoachEntry[];
+  const emotions: CoachMessage["emotion"][] = ["celebrating", "happy"];
+  return msgs.map((msg, i) => ({
+    title: msg.title,
+    body: msg.body,
+    emotion: emotions[i] ?? "celebrating",
+    action: msg.action ? { label: msg.action, to: "/tests" } : undefined,
+  }));
+}
 
-const POST_TEST_MID: MessageTemplate[] = [
-  {
-    title: "Buen trabajo",
-    body: "Un {score}% en {topic} — vas por buen camino. Repasa las {incorrect_count} preguntas que fallaste y veras como subes rapidamente.",
-    emotion: "encouraging",
-    action: { label: "Repasar fallos", to: "/tests" },
-  },
-  {
-    title: "Progreso constante",
-    body: "{correct_count} de {total_questions} correctas en {topic}. Cada intento te acerca mas. Revisa los errores y repite el test cuando estes lista.",
-    emotion: "idle",
-    action: { label: "Ver tests", to: "/tests" },
-  },
-];
+function get_post_test_mid_templates(): MessageTemplate[] {
+  const msgs = i18n.t("coach.post_test_mid", { ns: "landing", returnObjects: true }) as I18nCoachEntry[];
+  const emotions: CoachMessage["emotion"][] = ["encouraging", "idle"];
+  return msgs.map((msg, i) => ({
+    title: msg.title,
+    body: msg.body,
+    emotion: emotions[i] ?? "encouraging",
+    action: msg.action ? { label: msg.action, to: "/tests" } : undefined,
+  }));
+}
 
-const POST_TEST_LOW: MessageTemplate[] = [
-  {
-    title: "No te desanimes",
-    body: "Un {score}% en {topic} es un punto de partida. Revisa las explicaciones de cada pregunta y vuelve a intentarlo. La persistencia es tu mejor arma.",
-    emotion: "worried",
-    action: { label: "Repasar tema", to: "/tests" },
-  },
-  {
-    title: "A seguir intentando",
-    body: "Este resultado en {topic} te muestra donde necesitas reforzar. Dedicale tiempo al repaso y veras como mejoras en el proximo intento.",
-    emotion: "encouraging",
-    action: { label: "Test de refuerzo", to: "/tests" },
-  },
-];
+function get_post_test_low_templates(): MessageTemplate[] {
+  const msgs = i18n.t("coach.post_test_low", { ns: "landing", returnObjects: true }) as I18nCoachEntry[];
+  const emotions: CoachMessage["emotion"][] = ["worried", "encouraging"];
+  return msgs.map((msg, i) => ({
+    title: msg.title,
+    body: msg.body,
+    emotion: emotions[i] ?? "worried",
+    action: msg.action ? { label: msg.action, to: "/tests" } : undefined,
+  }));
+}
 
 function interpolate(template: string, context: CoachContext): string {
   return template.replace(/\{(\w+)\}/g, (match, key) => {
@@ -118,9 +93,9 @@ function pick_random<T>(arr: T[]): T {
 }
 
 function get_post_test_templates(score: number): MessageTemplate[] {
-  if (score >= 80) return POST_TEST_HIGH;
-  if (score >= 50) return POST_TEST_MID;
-  return POST_TEST_LOW;
+  if (score >= 80) return get_post_test_high_templates();
+  if (score >= 50) return get_post_test_mid_templates();
+  return get_post_test_low_templates();
 }
 
 let message_counter = 0;
@@ -150,7 +125,7 @@ function build_message(
 
 export const coach_service = {
   get_entry_message(context: CoachContext): CoachMessage {
-    const template = pick_random(TEMPLATES.app_entry);
+    const template = pick_random(get_app_entry_templates());
     return build_message("app_entry", template, context);
   },
 
@@ -161,12 +136,12 @@ export const coach_service = {
   },
 
   get_auto_test_message(context: CoachContext): CoachMessage {
-    const template = pick_random(TEMPLATES.auto_generated_test);
+    const template = pick_random(get_auto_test_templates());
     return build_message("auto_generated_test", template, context);
   },
 
   get_daily_limit_message(context: CoachContext): CoachMessage {
-    const template = pick_random(TEMPLATES.daily_point_limit);
+    const template = pick_random(get_daily_limit_templates());
     return build_message("daily_point_limit", template, context);
   },
 };

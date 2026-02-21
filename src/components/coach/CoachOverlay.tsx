@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { X, MessageCircle } from "lucide-react";
 import { use_coach_store } from "@/stores/coach-store";
@@ -35,6 +36,7 @@ function trigger_fab_message() {
 }
 
 export function CoachOverlay() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const is_visible = use_coach_store((s) => s.is_visible);
   const current_message = use_coach_store((s) => s.current_message);
@@ -138,7 +140,7 @@ export function CoachOverlay() {
           </button>
 
           <p className="text-[10px] font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-1.5">
-            Tu Coach
+            {t('coach.title')}
           </p>
           <h3 className="text-sm font-bold text-foreground mb-1.5 pr-6">
             {current_message?.title ?? ""}
@@ -163,7 +165,7 @@ export function CoachOverlay() {
               onClick={handle_dismiss}
               className="text-xs h-8 text-muted-foreground"
             >
-              Ahora no
+              {t('coach.dismiss')}
             </Button>
           </div>
 

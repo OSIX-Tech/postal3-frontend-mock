@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import {
   Bell,
@@ -26,22 +27,23 @@ import { notification_service } from "@/services/notification-service";
 import { MySpaceLayout } from "@/components/layout/MySpaceLayout";
 import type { NotificationSettings, ReminderFrequency } from "@/types/notification";
 
-const FREQUENCY_LABELS: Record<ReminderFrequency, string> = {
-  daily: "Diario",
-  every_other_day: "Cada 2 días",
-  weekly: "Semanal",
-  never: "Nunca",
-};
-
-const NOTIFICATION_TYPES = [
-  { icon: Flame, label: "Rachas", description: "Alertas de racha en peligro y hitos alcanzados" },
-  { icon: Bot, label: "Coach", description: "Mensajes del coach con recomendaciones" },
-  { icon: Swords, label: "Retos", description: "Retos recibidos y resultados" },
-  { icon: Users, label: "Social", description: "Solicitudes de amistad y actividad" },
-];
-
 export function NotificationSettingsPage() {
+  const { t } = useTranslation('profile');
   const query_client = useQueryClient();
+
+  const FREQUENCY_LABELS: Record<ReminderFrequency, string> = {
+    daily: t('notification_settings.frequency_daily'),
+    every_other_day: t('notification_settings.frequency_every_other_day'),
+    weekly: t('notification_settings.frequency_weekly'),
+    never: t('notification_settings.frequency_never'),
+  };
+
+  const NOTIFICATION_TYPES = [
+    { icon: Flame, label: t('notification_settings.type_streaks'), description: t('notification_settings.type_streaks_desc') },
+    { icon: Bot, label: t('notification_settings.type_coach'), description: t('notification_settings.type_coach_desc') },
+    { icon: Swords, label: t('notification_settings.type_challenges'), description: t('notification_settings.type_challenges_desc') },
+    { icon: Users, label: t('notification_settings.type_social'), description: t('notification_settings.type_social_desc') },
+  ];
 
   const { data: settings, isLoading } = useQuery({
     queryKey: ["notification-settings"],
@@ -53,10 +55,10 @@ export function NotificationSettingsPage() {
       notification_service.update_settings(data),
     onSuccess: () => {
       query_client.invalidateQueries({ queryKey: ["notification-settings"] });
-      toast.success("Ajustes guardados");
+      toast.success(t('notification_settings.toast_saved'));
     },
     onError: () => {
-      toast.error("Error al guardar los ajustes");
+      toast.error(t('notification_settings.toast_error'));
     },
   });
 
@@ -67,8 +69,8 @@ export function NotificationSettingsPage() {
   if (isLoading || !settings) {
     return (
       <MySpaceLayout
-        title="Ajustes de avisos"
-        description="Configura cómo y cuándo recibir notificaciones"
+        title={t('notification_settings.title')}
+        description={t('notification_settings.description')}
       >
         <div className="flex items-center justify-center py-16">
           <Loader2 className="h-8 w-8 animate-spin text-violet-600" />
@@ -79,14 +81,14 @@ export function NotificationSettingsPage() {
 
   return (
     <MySpaceLayout
-      title="Ajustes de avisos"
-      description="Configura cómo y cuándo recibir notificaciones"
+      title={t('notification_settings.title')}
+      description={t('notification_settings.description')}
     >
       <div className="space-y-6">
         {/* Channels */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Canales de notificación</CardTitle>
+            <CardTitle className="text-base">{t('notification_settings.channels_title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
@@ -94,10 +96,10 @@ export function NotificationSettingsPage() {
                 <Bell className="h-4 w-4 text-muted-foreground" />
                 <div>
                   <Label htmlFor="push" className="cursor-pointer">
-                    Notificaciones push
+                    {t('notification_settings.push_label')}
                   </Label>
                   <p className="text-xs text-muted-foreground">
-                    Alertas en el navegador
+                    {t('notification_settings.push_description')}
                   </p>
                 </div>
               </div>
@@ -115,10 +117,10 @@ export function NotificationSettingsPage() {
                 <Mail className="h-4 w-4 text-muted-foreground" />
                 <div>
                   <Label htmlFor="email" className="cursor-pointer">
-                    Notificaciones por email
+                    {t('notification_settings.email_label')}
                   </Label>
                   <p className="text-xs text-muted-foreground">
-                    Resumen diario por correo
+                    {t('notification_settings.email_description')}
                   </p>
                 </div>
               </div>
@@ -138,17 +140,17 @@ export function NotificationSettingsPage() {
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
               <Moon className="h-4 w-4" />
-              No molestar
+              {t('notification_settings.dnd_title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground mb-4">
-              No recibirás notificaciones push durante este horario.
+              {t('notification_settings.dnd_description')}
             </p>
             <div className="flex items-center gap-4">
               <div className="space-y-1.5">
                 <Label htmlFor="dnd-start" className="text-xs">
-                  Desde
+                  {t('notification_settings.dnd_from')}
                 </Label>
                 <Input
                   id="dnd-start"
@@ -161,7 +163,7 @@ export function NotificationSettingsPage() {
               <span className="text-muted-foreground mt-5">—</span>
               <div className="space-y-1.5">
                 <Label htmlFor="dnd-end" className="text-xs">
-                  Hasta
+                  {t('notification_settings.dnd_to')}
                 </Label>
                 <Input
                   id="dnd-end"
@@ -180,12 +182,12 @@ export function NotificationSettingsPage() {
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
               <Clock className="h-4 w-4" />
-              Frecuencia de recordatorios
+              {t('notification_settings.reminder_title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground mb-4">
-              Con qué frecuencia te recordamos estudiar si no has hecho un test.
+              {t('notification_settings.reminder_description')}
             </p>
             <Select
               value={settings.reminder_frequency}
@@ -212,7 +214,7 @@ export function NotificationSettingsPage() {
         {/* Preview of notification types */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Tipos de notificaciones</CardTitle>
+            <CardTitle className="text-base">{t('notification_settings.types_title')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">

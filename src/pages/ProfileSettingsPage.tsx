@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MySpaceLayout } from "@/components/layout";
+import { LanguageSelector } from "@/components/layout/LanguageSelector";
 import {
   ProfileAvatar,
   AvatarUploadDialog,
@@ -8,12 +10,13 @@ import {
   OposicionSelector,
   BlockedUsersList,
 } from "@/components/profile";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { use_my_profile, use_blocked_users } from "@/hooks/use-profile";
 import { LoadingState, ErrorState } from "@/components/feedback";
 import type { ProfileSettings } from "@/types/profile";
 
 export function ProfileSettingsPage() {
+  const { t } = useTranslation('profile');
   const {
     profile,
     is_loading,
@@ -43,17 +46,17 @@ export function ProfileSettingsPage() {
 
   if (is_loading) {
     return (
-      <MySpaceLayout title="Opciones">
-        <LoadingState text="Cargando ajustes..." />
+      <MySpaceLayout title={t('settings.title')}>
+        <LoadingState text={t('settings.loading')} />
       </MySpaceLayout>
     );
   }
 
   if (is_error || !profile) {
     return (
-      <MySpaceLayout title="Opciones">
+      <MySpaceLayout title={t('settings.title')}>
         <ErrorState
-          description="No se pudieron cargar los ajustes"
+          description={t('settings.error')}
           on_retry={() => window.location.reload()}
         />
       </MySpaceLayout>
@@ -68,12 +71,12 @@ export function ProfileSettingsPage() {
   };
 
   return (
-    <MySpaceLayout title="Opciones">
+    <MySpaceLayout title={t('settings.title')}>
       <div className="space-y-6">
         {/* Avatar Section */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Avatar</CardTitle>
+            <CardTitle className="text-base">{t('settings.avatar')}</CardTitle>
           </CardHeader>
           <CardContent className="flex justify-center">
             <ProfileAvatar
@@ -113,6 +116,17 @@ export function ProfileSettingsPage() {
           on_fetch_available={fetch_available_oposiciones}
           is_loading={oposicion_pending}
         />
+
+        {/* Language */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">{t('settings.language')}</CardTitle>
+            <CardDescription>{t('settings.language_description')}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <LanguageSelector />
+          </CardContent>
+        </Card>
 
         {/* Blocked Users */}
         <BlockedUsersList

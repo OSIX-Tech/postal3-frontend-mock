@@ -3,7 +3,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Link } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,13 +13,15 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 
-const login_schema = z.object({
-  email: z.string().email("Email inválido"),
-  password: z.string().min(6, "Mínimo 6 caracteres"),
-  remember_me: z.boolean().optional(),
-});
+function create_login_schema(t: TFunction<'auth'>) {
+  return z.object({
+    email: z.string().email(t('validation.email_invalid')),
+    password: z.string().min(6, t('validation.min_6_chars')),
+    remember_me: z.boolean().optional(),
+  });
+}
 
-type LoginFormData = z.infer<typeof login_schema>;
+type LoginFormData = z.infer<ReturnType<typeof create_login_schema>>;
 
 interface LoginFormProps {
   on_submit: (data: LoginFormData) => Promise<void>;
@@ -26,7 +30,9 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ on_submit, is_loading, error }: LoginFormProps) {
+  const { t } = useTranslation('auth');
   const [show_password, set_show_password] = useState(false);
+  const login_schema = useMemo(() => create_login_schema(t), [t]);
 
   const {
     register,
@@ -54,13 +60,13 @@ export function LoginForm({ on_submit, is_loading, error }: LoginFormProps) {
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{t('login.email_label')}</Label>
         <div className="relative">
           <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             id="email"
             type="email"
-            placeholder="tu@email.com"
+            placeholder={t('login.email_placeholder')}
             className={cn("pl-10", errors.email && "border-destructive")}
             disabled={is_loading}
             {...register("email")}
@@ -73,12 +79,12 @@ export function LoginForm({ on_submit, is_loading, error }: LoginFormProps) {
 
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <Label htmlFor="password">Contraseña</Label>
+          <Label htmlFor="password">{t('login.password_label')}</Label>
           <Link
             to="/forgot-password"
             className="text-xs text-primary hover:underline"
           >
-            ¿Olvidaste tu contraseña?
+            {t('login.forgot_password')}
           </Link>
         </div>
         <div className="relative">
@@ -117,7 +123,7 @@ export function LoginForm({ on_submit, is_loading, error }: LoginFormProps) {
           disabled={is_loading}
         />
         <Label htmlFor="remember_me" className="text-sm font-normal cursor-pointer">
-          Recordar sesión
+          {t('login.remember_me')}
         </Label>
       </div>
 
@@ -125,17 +131,17 @@ export function LoginForm({ on_submit, is_loading, error }: LoginFormProps) {
         {is_loading ? (
           <>
             <Spinner size="sm" className="border-white/30 border-t-white" />
-            Iniciando sesión...
+            {t('login.submit_loading')}
           </>
         ) : (
-          "Iniciar sesión"
+          t('login.submit')
         )}
       </Button>
 
       <p className="text-center text-sm text-muted-foreground">
-        ¿No tienes cuenta?{" "}
+        {t('login.no_account')}{" "}
         <Link to="/register" className="font-medium text-primary hover:underline">
-          Regístrate
+          {t('login.register_link')}
         </Link>
       </p>
     </form>

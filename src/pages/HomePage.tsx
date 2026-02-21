@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { use_auth_store } from "@/stores/auth-store";
 import { use_coach } from "@/hooks/use-coach";
 import { Button } from "@/components/ui/button";
@@ -37,6 +38,7 @@ const DOT_GRID = {
 const DOT_GRID_DARK = "dark:[background-image:radial-gradient(circle,oklch(0.3_0.01_285)_1px,transparent_1px)]";
 
 function Landing() {
+  const { t } = useTranslation('landing');
   return (
     <div>
       {/* ═══════════════════════════════════════════
@@ -62,38 +64,36 @@ function Landing() {
                 className="mb-8 border-violet-200 dark:border-violet-800 text-violet-700 dark:text-violet-300 text-xs font-semibold px-3 py-1 gap-1.5"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
-                Oposiciones con gamificación
+                {t('hero.badge')}
               </Badge>
 
               <h1 className="text-[2.6rem] sm:text-5xl xl:text-[3.4rem] font-extrabold text-foreground leading-[1.08] tracking-tight">
-                Deja de estudiar
+                {t('hero.title_line1')}
                 <br />
-                <span className="text-violet-600 dark:text-violet-400">a ciegas.</span>
+                <span className="text-violet-600 dark:text-violet-400">{t('hero.title_line2')}</span>
               </h1>
 
               <p className="mt-6 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-md">
-                12.000 preguntas oficiales. Analítica por tema. Rachas diarias.
-                Ligas competitivas. Un sistema diseñado para que
-                {" "}<span className="text-foreground font-semibold">apruebes tu oposición</span>.
+                {t('hero.description')}{" "}<span className="text-foreground font-semibold">{t('hero.description_highlight')}</span>.
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Button size="lg" className="h-11 px-6 rounded-xl font-bold btn-primary-glow" asChild>
                   <Link to="/register">
-                    Empezar ahora
+                    {t('hero.cta_primary')}
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="ghost" className="h-11 px-6 rounded-xl font-semibold text-muted-foreground" asChild>
-                  <Link to="/login">Ya tengo cuenta</Link>
+                  <Link to="/login">{t('hero.cta_secondary')}</Link>
                 </Button>
               </div>
 
               <div className="mt-6 flex items-center gap-5 text-xs text-muted-foreground">
-                {["12.000+ preguntas oficiales", "Analítica por tema", "Rachas y ligas"].map((t) => (
-                  <span key={t} className="flex items-center gap-1">
+                {[t('hero.check_questions'), t('hero.check_analytics'), t('hero.check_streaks')].map((item) => (
+                  <span key={item} className="flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                    {t}
+                    {item}
                   </span>
                 ))}
               </div>
@@ -103,7 +103,7 @@ function Landing() {
             <div className="lg:col-span-7 relative">
               <img
                 src="/opo_friendly.png"
-                alt="Preparación de oposiciones con Postal3"
+                alt={t('hero.hero_alt')}
                 className="relative w-full object-contain"
               />
             </div>
@@ -118,10 +118,10 @@ function Landing() {
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-border">
             {[
-              { value: "12.847", label: "Preguntas oficiales" },
-              { value: "2.400+", label: "Opositoras activas" },
-              { value: "85%", label: "Tasa de aprobados" },
-              { value: "4,8★", label: "Satisfacción media" },
+              { value: t('metrics.questions_value'), label: t('metrics.questions_label') },
+              { value: t('metrics.users_value'), label: t('metrics.users_label') },
+              { value: t('metrics.pass_rate_value'), label: t('metrics.pass_rate_label') },
+              { value: t('metrics.satisfaction_value'), label: t('metrics.satisfaction_label') },
             ].map((s) => (
               <div key={s.label} className="py-8 sm:py-10 text-center">
                 <p className="text-xl sm:text-2xl font-extrabold text-foreground tabular-nums tracking-tight">{s.value}</p>
@@ -138,11 +138,11 @@ function Landing() {
       <section className="py-24 sm:py-32">
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <div className="max-w-lg mb-16">
-            <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">Funcionalidades</p>
+            <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">{t('features.section_label')}</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-[1.15]">
-              Diseñado para que apruebes,
+              {t('features.title_line1')}
               <br className="hidden sm:block" />
-              no para que estudies más.
+              {t('features.title_line2')}
             </h2>
           </div>
 
@@ -154,13 +154,12 @@ function Landing() {
                 <div className="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 flex items-center justify-center mb-5">
                   <BookOpen className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">Tests oficiales por temas</h3>
+                <h3 className="text-lg font-bold text-foreground mb-2">{t('features.tests_title')}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-                  Preguntas reales de convocatorias anteriores, organizadas por materia y dificultad.
-                  Practica exactamente lo que entra en tu examen.
+                  {t('features.tests_description')}
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-auto">
-                  {["Constitución", "Ley 39/2015", "EBEP", "Ley 40/2015", "Procedimiento"].map((tag) => (
+                  {(t('features.tests_tags', { returnObjects: true }) as string[]).map((tag) => (
                     <span key={tag} className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-muted text-muted-foreground">
                       {tag}
                     </span>
@@ -175,9 +174,9 @@ function Landing() {
                 <div className="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-5">
                   <TrendingUp className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">Sistema ELO</h3>
+                <h3 className="text-lg font-bold text-foreground mb-2">{t('features.elo_title')}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Rating objetivo que refleja tu nivel real con cada test que completas.
+                  {t('features.elo_description')}
                 </p>
                 {/* Mini ELO visual */}
                 <div className="mt-auto pt-5">
@@ -200,9 +199,9 @@ function Landing() {
                 <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-5">
                   <Flame className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">Rachas diarias</h3>
+                <h3 className="text-lg font-bold text-foreground mb-2">{t('features.streaks_title')}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Mantén el hábito con rachas, hitos y recompensas que te premian por la constancia.
+                  {t('features.streaks_description')}
                 </p>
               </CardContent>
             </Card>
@@ -213,9 +212,9 @@ function Landing() {
                 <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5">
                   <BarChart3 className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">Analítica detallada</h3>
+                <h3 className="text-lg font-bold text-foreground mb-2">{t('features.analytics_title')}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Identifica temas débiles. Mide tu progreso. Optimiza tu plan de estudio con datos reales.
+                  {t('features.analytics_description')}
                 </p>
               </CardContent>
             </Card>
@@ -226,9 +225,9 @@ function Landing() {
                 <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-5">
                   <Trophy className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">Ligas semanales</h3>
+                <h3 className="text-lg font-bold text-foreground mb-2">{t('features.leagues_title')}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Compite con opositoras de tu nivel. Asciende de liga cada semana demostrando constancia.
+                  {t('features.leagues_description')}
                 </p>
               </CardContent>
             </Card>
@@ -242,9 +241,9 @@ function Landing() {
       <section className="py-24 sm:py-28 border-y border-border bg-muted/40">
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <div className="max-w-lg mb-16">
-            <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">Cómo funciona</p>
+            <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">{t('how_it_works.section_label')}</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
-              De cero a estudiar en 2 minutos
+              {t('how_it_works.title')}
             </h2>
           </div>
 
@@ -253,20 +252,20 @@ function Landing() {
               {
                 step: "01",
                 icon: GraduationCap,
-                title: "Elige tu oposición",
-                description: "Auxiliar, Administrativo, Tramitación, Auxilio Judicial o Correos. Selecciona y empezamos.",
+                title: t('how_it_works.step1_title'),
+                description: t('how_it_works.step1_description'),
               },
               {
                 step: "02",
                 icon: BookOpen,
-                title: "Haz tests cada día",
-                description: "Preguntas de exámenes reales. Respuestas explicadas. Marca las difíciles para repasar.",
+                title: t('how_it_works.step2_title'),
+                description: t('how_it_works.step2_description'),
               },
               {
                 step: "03",
                 icon: BarChart3,
-                title: "Mide y compite",
-                description: "Analítica por tema, rating ELO, ligas semanales. Sabrás exactamente dónde estás.",
+                title: t('how_it_works.step3_title'),
+                description: t('how_it_works.step3_description'),
               },
             ].map((s) => (
               <div key={s.step} className="relative">
@@ -289,9 +288,9 @@ function Landing() {
       <section className="py-24 sm:py-32">
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <div className="max-w-lg mb-16">
-            <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">Testimonios</p>
+            <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">{t('testimonials.section_label')}</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
-              Lo que dicen nuestras opositoras
+              {t('testimonials.title')}
             </h2>
           </div>
 
@@ -301,18 +300,15 @@ function Landing() {
               <CardContent className="p-8 sm:p-10">
                 <Quote className="w-8 h-8 text-violet-300 dark:text-violet-700 mb-4" />
                 <p className="text-lg sm:text-xl text-foreground leading-relaxed font-medium mb-8">
-                  Las rachas me han cambiado la forma de estudiar. Antes dejaba de preparar
-                  a los pocos días. Ahora llevo 45 días seguidos sin fallar. La analítica me
-                  mostró que fallaba siempre en Procedimiento Administrativo — enfoqué ahí
-                  el repaso y subí un 20% en un mes.
+                  {t('testimonials.featured_text')}
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-violet-200 dark:bg-violet-800 flex items-center justify-center">
                     <span className="text-xs font-bold text-violet-700 dark:text-violet-300">LM</span>
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-foreground">Laura Martínez</p>
-                    <p className="text-xs text-muted-foreground">Auxiliar Administrativo — aprobó en 2025</p>
+                    <p className="text-sm font-bold text-foreground">{t('testimonials.featured_name')}</p>
+                    <p className="text-xs text-muted-foreground">{t('testimonials.featured_role')}</p>
                   </div>
                 </div>
               </CardContent>
@@ -322,19 +318,19 @@ function Landing() {
             <div className="lg:col-span-2 flex flex-col gap-6">
               {[
                 {
-                  text: "El sistema de ligas me motiva muchísimo. Competir con otras opositoras hace que estudiar sea mucho menos aburrido. He subido a Oro en 3 semanas.",
-                  name: "Carmen Rodríguez",
+                  text: t('testimonials.testimonial1_text'),
+                  name: t('testimonials.testimonial1_name'),
                   initials: "CR",
-                  role: "Tramitación Procesal",
+                  role: t('testimonials.testimonial1_role'),
                 },
                 {
-                  text: "La clave para mí fue la analítica. Descubrí que fallaba siempre los mismos temas. Enfoqué el repaso y aprobé a la primera convocatoria.",
-                  name: "Ana García",
+                  text: t('testimonials.testimonial2_text'),
+                  name: t('testimonials.testimonial2_name'),
                   initials: "AG",
-                  role: "Administrativo del Estado",
+                  role: t('testimonials.testimonial2_role'),
                 },
-              ].map((t) => (
-                <Card key={t.name} className="flex-1 border-border">
+              ].map((item) => (
+                <Card key={item.name} className="flex-1 border-border">
                   <CardContent className="p-6 flex flex-col h-full">
                     <div className="flex gap-0.5 mb-3">
                       {Array.from({ length: 5 }).map((_, i) => (
@@ -342,15 +338,15 @@ function Landing() {
                       ))}
                     </div>
                     <p className="text-sm text-foreground leading-relaxed flex-1">
-                      "{t.text}"
+                      "{item.text}"
                     </p>
                     <div className="flex items-center gap-2.5 mt-4 pt-4 border-t border-border">
                       <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center">
-                        <span className="text-[10px] font-bold text-muted-foreground">{t.initials}</span>
+                        <span className="text-[10px] font-bold text-muted-foreground">{item.initials}</span>
                       </div>
                       <div>
-                        <p className="text-xs font-semibold text-foreground">{t.name}</p>
-                        <p className="text-[10px] text-muted-foreground">{t.role}</p>
+                        <p className="text-xs font-semibold text-foreground">{item.name}</p>
+                        <p className="text-[10px] text-muted-foreground">{item.role}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -369,14 +365,14 @@ function Landing() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Left: heading */}
             <div className="lg:col-span-2">
-              <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">FAQ</p>
+              <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-3">{t('faq.section_label')}</p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-[1.15]">
-                Preguntas
+                {t('faq.title_line1')}
                 <br />
-                frecuentes
+                {t('faq.title_line2')}
               </h2>
               <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
-                Si tienes otra duda, escríbenos a{" "}
+                {t('faq.contact_text')}{" "}
                 <span className="text-foreground font-semibold">hola@postal3.es</span>
               </p>
             </div>
@@ -385,26 +381,11 @@ function Landing() {
             <div className="lg:col-span-3">
               <Accordion type="single" collapsible className="space-y-2">
                 {[
-                  {
-                    q: "¿Cuánto cuesta?",
-                    a: "Consulta los planes disponibles en nuestra web. Ofrecemos diferentes opciones para que elijas la que mejor se adapte a ti.",
-                  },
-                  {
-                    q: "¿Qué oposiciones están disponibles?",
-                    a: "Auxiliar Administrativo del Estado, Administrativo del Estado, Tramitación Procesal, Auxilio Judicial y Correos y Telégrafos.",
-                  },
-                  {
-                    q: "¿Las preguntas son de exámenes reales?",
-                    a: "Sí. El banco de preguntas está formado por preguntas de convocatorias oficiales anteriores, revisadas y actualizadas por nuestro equipo.",
-                  },
-                  {
-                    q: "¿Cómo funciona el sistema de ligas?",
-                    a: "Cada semana compites con opositoras de tu nivel. Las mejores ascienden (Bronce → Plata → Oro → Diamante) y las que menos practican descienden.",
-                  },
-                  {
-                    q: "¿Funciona en el móvil?",
-                    a: "Sí. La plataforma es 100% responsive y funciona en cualquier dispositivo con navegador web.",
-                  },
+                  { q: t('faq.q1'), a: t('faq.a1') },
+                  { q: t('faq.q2'), a: t('faq.a2') },
+                  { q: t('faq.q3'), a: t('faq.a3') },
+                  { q: t('faq.q4'), a: t('faq.a4') },
+                  { q: t('faq.q5'), a: t('faq.a5') },
                 ].map((faq, i) => (
                   <AccordionItem key={i} value={`faq-${i}`} className="rounded-xl border border-border bg-card px-5">
                     <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline py-4">
@@ -439,11 +420,10 @@ function Landing() {
 
         <div className="relative max-w-3xl mx-auto px-5 sm:px-8 py-24 sm:py-32 text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-5">
-            Tu plaza te está esperando.
+            {t('cta.title')}
           </h2>
           <p className="text-base sm:text-lg text-stone-400 mb-10 max-w-lg mx-auto leading-relaxed">
-            Cada día que no estudias es un día que te aleja de tu objetivo.
-            Empieza ahora y únete a miles de opositoras que ya confían en Postal3.
+            {t('cta.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
@@ -452,7 +432,7 @@ function Landing() {
               asChild
             >
               <Link to="/register">
-                Crear cuenta
+                {t('cta.register')}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
@@ -463,7 +443,7 @@ function Landing() {
               asChild
             >
               <Link to="/login">
-                Acceder a mi cuenta
+                {t('cta.login')}
               </Link>
             </Button>
           </div>
@@ -512,6 +492,7 @@ const TESTS = [
 ];
 
 function Dashboard() {
+  const { t } = useTranslation('landing');
   const { user } = use_auth_store();
   const { trigger_app_entry } = use_coach();
   const first_name = user?.name?.split(" ")[0] ?? "";
@@ -533,21 +514,20 @@ function Dashboard() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-stone-900/90 via-stone-900/70 to-stone-900/40" />
         <div className="relative px-8 py-10 sm:py-12">
-          <p className="text-stone-300 text-sm mb-1">Auxiliar Administrativo del Estado</p>
+          <p className="text-stone-300 text-sm mb-1">{t('dashboard.oposicion')}</p>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
-            Hola, {first_name}
+            {t('dashboard.greeting', { name: first_name })}
           </h1>
           <p className="text-stone-300 text-sm max-w-md leading-relaxed mb-6">
-            Llevas <span className="text-white font-semibold">12 días</span> de racha
-            y una precisión del <span className="text-white font-semibold">80%</span>.
-            Sigue así.
+            {t('dashboard.streak_info_prefix')}<span className="text-white font-semibold">{t('dashboard.streak_days', { days: 12 })}</span>{t('dashboard.streak_info_middle')}<span className="text-white font-semibold">80%</span>{t('dashboard.streak_info_suffix')}{" "}
+            {t('dashboard.keep_going')}
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Link
               to="/tests"
               className="inline-flex items-center gap-2 bg-white text-stone-900 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-stone-100 transition-colors"
             >
-              Empezar test
+              {t('dashboard.start_test')}
               <ArrowRight className="w-4 h-4" />
             </Link>
             <div className="flex items-center gap-4 text-sm text-stone-300">
@@ -568,12 +548,12 @@ function Dashboard() {
       {/* ── Tests: fila horizontal de cards pequeñas ── */}
       <section className="mb-12">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base font-bold text-foreground dark:text-white">Tests disponibles</h2>
+          <h2 className="text-base font-bold text-foreground dark:text-white">{t('dashboard.available_tests')}</h2>
           <Link
             to="/tests"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            Ver todos
+            {t('dashboard.view_all')}
           </Link>
         </div>
 
@@ -592,7 +572,7 @@ function Dashboard() {
                 />
                 {test.review && (
                   <span className="absolute top-1.5 right-1.5 text-[10px] font-bold bg-white/90 dark:bg-black/70 text-orange-600 dark:text-orange-400 px-1.5 py-px rounded-md">
-                    Repasar
+                    {t('dashboard.review')}
                   </span>
                 )}
                 {test.best && (
@@ -604,7 +584,7 @@ function Dashboard() {
               <p className="text-xs font-semibold text-foreground leading-tight truncate">
                 {test.title}
               </p>
-              <p className="text-[11px] text-muted-foreground">{test.questions} preguntas</p>
+              <p className="text-[11px] text-muted-foreground">{t('dashboard.questions_count', { count: test.questions })}</p>
             </Link>
           ))}
         </div>
@@ -615,21 +595,21 @@ function Dashboard() {
 
         {/* Últimos resultados */}
         <section className="lg:col-span-2">
-          <h2 className="text-base font-bold mb-4 text-foreground dark:text-white">Últimos resultados</h2>
+          <h2 className="text-base font-bold mb-4 text-foreground dark:text-white">{t('dashboard.recent_results')}</h2>
           <div className="space-y-2.5">
             {[
               {
                 title: "Constitución Española",
                 correct: 28,
                 total: 30,
-                when: "Hoy",
+                when: t('dashboard.today'),
                 img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=80&h=80&fit=crop",
               },
               {
                 title: "Ley 39/2015",
                 correct: 22,
                 total: 25,
-                when: "Ayer",
+                when: t('dashboard.yesterday'),
                 img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=80&h=80&fit=crop",
               },
               {
@@ -687,7 +667,7 @@ function Dashboard() {
               <div className="absolute inset-0 bg-indigo-900/70" />
               <div className="relative flex items-center gap-2 px-4 pt-4">
                 <Trophy className="w-5 h-5 text-amber-300" />
-                <span className="font-bold text-white text-lg">Liga Plata</span>
+                <span className="font-bold text-white text-lg">{t('dashboard.league_name')}</span>
                 <span className="ml-auto text-sm text-indigo-200">#45</span>
               </div>
             </div>
@@ -695,16 +675,16 @@ function Dashboard() {
               <div className="h-1.5 rounded-full bg-muted overflow-hidden mb-2">
                 <div className="h-full rounded-full bg-indigo-500" style={{ width: "62%" }} />
               </div>
-              <p className="text-xs text-muted-foreground">150 pts para Liga Oro</p>
+              <p className="text-xs text-muted-foreground">{t('dashboard.league_points_needed', { points: 150 })}</p>
             </div>
           </div>
 
           {/* Stats mini */}
           <div className="grid grid-cols-3 gap-2.5">
             {[
-              { value: "87", label: "Tests", icon: BookOpen },
-              { value: "12d", label: "Racha", icon: Flame },
-              { value: "80%", label: "Precisión", icon: Target },
+              { value: "87", label: t('dashboard.stats_tests'), icon: BookOpen },
+              { value: "12d", label: t('dashboard.stats_streak'), icon: Flame },
+              { value: "80%", label: t('dashboard.stats_accuracy'), icon: Target },
             ].map((s) => (
               <div key={s.label} className="rounded-xl bg-card border border-border shadow-sm p-3 text-center">
                 <s.icon className="w-4 h-4 text-muted-foreground mx-auto mb-1.5" />

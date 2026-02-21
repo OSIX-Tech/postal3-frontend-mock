@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "tests": "Tests",
+    "my_space": "El Meu Espai",
+    "design_system": "Design System"
+  },
+  "actions": {
+    "login": "Iniciar sessió",
+    "register": "Registrar-se",
+    "logout": "Tancar sessió",
+    "cancel": "Cancel·lar",
+    "retry": "Reintentar",
+    "save": "Desar",
+    "back": "Tornar"
+  },
+  "notifications": {
+    "title": "Notificacions",
+    "view_all": "Veure totes les alertes"
+  },
+  "user_menu": {
+    "my_space": "El meu espai"
+  },
+  "footer": {
+    "about_us": "Sobre nosaltres",
+    "privacy": "Privacitat",
+    "cookies": "Cookies",
+    "legal": "Avís legal",
+    "owned_by": "Propietat de {{name}}",
+    "follow_us": "Segueix-nos a les xarxes socials:",
+    "quick_links": "Enllaços ràpids"
+  },
+  "sidebar": {
+    "my_space": "El Meu Espai",
+    "configuration": "Configuració",
+    "tests": "Tests",
+    "resources": "Recursos",
+    "challenges": "Desafiaments",
+    "statistics": "Estadístiques",
+    "my_streak": "La meva ratxa",
+    "my_account": "El meu compte",
+    "options": "Opcions",
+    "alerts": "Alertes",
+    "notification_settings": "Ajustos d'avisos"
+  },
+  "coach": {
+    "title": "El teu Coach",
+    "dismiss": "Ara no"
+  },
+  "not_found": {
+    "title": "404",
+    "message": "Pàgina no trobada",
+    "go_home": "Tornar a l'inici"
+  },
+  "language": {
+    "label": "Idioma",
+    "es": "Castellano",
+    "gl": "Galego",
+    "eu": "Euskara",
+    "ca": "Català"
+  }
+}

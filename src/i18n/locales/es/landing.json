@@ -1,0 +1,185 @@
+{
+  "hero": {
+    "badge": "Oposiciones con gamificación",
+    "title_line1": "Deja de estudiar",
+    "title_line2": "a ciegas.",
+    "description": "12.000 preguntas oficiales. Analítica por tema. Rachas diarias. Ligas competitivas. Un sistema diseñado para que",
+    "description_highlight": "apruebes tu oposición",
+    "cta_primary": "Empezar ahora",
+    "cta_secondary": "Ya tengo cuenta",
+    "check_questions": "12.000+ preguntas oficiales",
+    "check_analytics": "Analítica por tema",
+    "check_streaks": "Rachas y ligas",
+    "hero_alt": "Preparación de oposiciones con Postal3"
+  },
+  "metrics": {
+    "questions_value": "12.847",
+    "questions_label": "Preguntas oficiales",
+    "users_value": "2.400+",
+    "users_label": "Opositoras activas",
+    "pass_rate_value": "85%",
+    "pass_rate_label": "Tasa de aprobados",
+    "satisfaction_value": "4,8★",
+    "satisfaction_label": "Satisfacción media"
+  },
+  "features": {
+    "section_label": "Funcionalidades",
+    "title_line1": "Diseñado para que apruebes,",
+    "title_line2": "no para que estudies más.",
+    "tests_title": "Tests oficiales por temas",
+    "tests_description": "Preguntas reales de convocatorias anteriores, organizadas por materia y dificultad. Practica exactamente lo que entra en tu examen.",
+    "tests_tags": ["Constitución", "Ley 39/2015", "EBEP", "Ley 40/2015", "Procedimiento"],
+    "elo_title": "Sistema ELO",
+    "elo_description": "Rating objetivo que refleja tu nivel real con cada test que completas.",
+    "streaks_title": "Rachas diarias",
+    "streaks_description": "Mantén el hábito con rachas, hitos y recompensas que te premian por la constancia.",
+    "analytics_title": "Analítica detallada",
+    "analytics_description": "Identifica temas débiles. Mide tu progreso. Optimiza tu plan de estudio con datos reales.",
+    "leagues_title": "Ligas semanales",
+    "leagues_description": "Compite con opositoras de tu nivel. Asciende de liga cada semana demostrando constancia."
+  },
+  "how_it_works": {
+    "section_label": "Cómo funciona",
+    "title": "De cero a estudiar en 2 minutos",
+    "step1_title": "Elige tu oposición",
+    "step1_description": "Auxiliar, Administrativo, Tramitación, Auxilio Judicial o Correos. Selecciona y empezamos.",
+    "step2_title": "Haz tests cada día",
+    "step2_description": "Preguntas de exámenes reales. Respuestas explicadas. Marca las difíciles para repasar.",
+    "step3_title": "Mide y compite",
+    "step3_description": "Analítica por tema, rating ELO, ligas semanales. Sabrás exactamente dónde estás."
+  },
+  "testimonials": {
+    "section_label": "Testimonios",
+    "title": "Lo que dicen nuestras opositoras",
+    "featured_text": "Las rachas me han cambiado la forma de estudiar. Antes dejaba de preparar a los pocos días. Ahora llevo 45 días seguidos sin fallar. La analítica me mostró que fallaba siempre en Procedimiento Administrativo — enfoqué ahí el repaso y subí un 20% en un mes.",
+    "featured_name": "Laura Martínez",
+    "featured_role": "Auxiliar Administrativo — aprobó en 2025",
+    "testimonial1_text": "El sistema de ligas me motiva muchísimo. Competir con otras opositoras hace que estudiar sea mucho menos aburrido. He subido a Oro en 3 semanas.",
+    "testimonial1_name": "Carmen Rodríguez",
+    "testimonial1_role": "Tramitación Procesal",
+    "testimonial2_text": "La clave para mí fue la analítica. Descubrí que fallaba siempre los mismos temas. Enfoqué el repaso y aprobé a la primera convocatoria.",
+    "testimonial2_name": "Ana García",
+    "testimonial2_role": "Administrativo del Estado"
+  },
+  "faq": {
+    "section_label": "FAQ",
+    "title_line1": "Preguntas",
+    "title_line2": "frecuentes",
+    "contact_text": "Si tienes otra duda, escríbenos a",
+    "q1": "¿Cuánto cuesta?",
+    "a1": "Consulta los planes disponibles en nuestra web. Ofrecemos diferentes opciones para que elijas la que mejor se adapte a ti.",
+    "q2": "¿Qué oposiciones están disponibles?",
+    "a2": "Auxiliar Administrativo del Estado, Administrativo del Estado, Tramitación Procesal, Auxilio Judicial y Correos y Telégrafos.",
+    "q3": "¿Las preguntas son de exámenes reales?",
+    "a3": "Sí. El banco de preguntas está formado por preguntas de convocatorias oficiales anteriores, revisadas y actualizadas por nuestro equipo.",
+    "q4": "¿Cómo funciona el sistema de ligas?",
+    "a4": "Cada semana compites con opositoras de tu nivel. Las mejores ascienden (Bronce → Plata → Oro → Diamante) y las que menos practican descienden.",
+    "q5": "¿Funciona en el móvil?",
+    "a5": "Sí. La plataforma es 100% responsive y funciona en cualquier dispositivo con navegador web."
+  },
+  "cta": {
+    "title": "Tu plaza te está esperando.",
+    "description": "Cada día que no estudias es un día que te aleja de tu objetivo. Empieza ahora y únete a miles de opositoras que ya confían en Postal3.",
+    "register": "Crear cuenta",
+    "login": "Acceder a mi cuenta"
+  },
+  "dashboard": {
+    "oposicion": "Auxiliar Administrativo del Estado",
+    "greeting": "Hola, {{name}}",
+    "streak_days": "{{days}} días",
+    "streak_info_prefix": "Llevas ",
+    "streak_info_middle": " de racha y una precisión del ",
+    "streak_info_suffix": ".",
+    "keep_going": "Sigue así.",
+    "start_test": "Empezar test",
+    "available_tests": "Tests disponibles",
+    "view_all": "Ver todos",
+    "review": "Repasar",
+    "questions_count": "{{count}} preguntas",
+    "recent_results": "Últimos resultados",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "league_name": "Liga Plata",
+    "league_points_needed": "{{points}} pts para Liga Oro",
+    "stats_tests": "Tests",
+    "stats_streak": "Racha",
+    "stats_accuracy": "Precisión"
+  },
+  "coach": {
+    "app_entry": [
+      {
+        "title": "Bienvenida de vuelta",
+        "body": "Hola {user_name}, la constancia es la clave del exito. Dedica aunque sea 15 minutos hoy a repasar tus temas pendientes.",
+        "action": "Empezar test"
+      },
+      {
+        "title": "Un dia mas, un paso mas",
+        "body": "Cada sesion de estudio te acerca a tu plaza, {user_name}. Hoy es un buen dia para superar tus limites.",
+        "action": "Ver tests"
+      },
+      {
+        "title": "Tu coach te saluda",
+        "body": "Hola {user_name}, recuerda que la preparacion diaria marca la diferencia entre aprobar y quedarse cerca. Vamos a por ello.",
+        "action": "Ir a practicar"
+      }
+    ],
+    "auto_test": [
+      {
+        "title": "Test personalizado listo",
+        "body": "He generado un test de {test_count} preguntas sobre {topic} basado en tus areas de mejora. Practicar lo dificil es lo que realmente te prepara.",
+        "action": "Hacer test"
+      },
+      {
+        "title": "Repaso inteligente",
+        "body": "Tienes un nuevo test de {topic} con {test_count} preguntas seleccionadas para reforzar tus puntos debiles.",
+        "action": "Empezar ahora"
+      }
+    ],
+    "daily_limit": [
+      {
+        "title": "Limite diario alcanzado",
+        "body": "Has llegado a {points} puntos hoy. Descansar tambien es parte del estudio. Vuelve manana con la mente fresca."
+      },
+      {
+        "title": "Gran sesion de estudio",
+        "body": "Increible esfuerzo hoy, {user_name}. Has alcanzado el limite de {points} puntos. Tu cerebro necesita procesar todo lo aprendido, nos vemos manana."
+      }
+    ],
+    "post_test_high": [
+      {
+        "title": "Resultado excelente",
+        "body": "Un {score}% en {topic} — {correct_count} de {total_questions} correctas. Estas demostrando un dominio solido. Sigue asi y la plaza es tuya.",
+        "action": "Seguir practicando"
+      },
+      {
+        "title": "Fantastico, {user_name}",
+        "body": "Has conseguido un {score}% en {topic}. Este nivel de preparacion es el que marca la diferencia en el examen real.",
+        "action": "Otro test"
+      }
+    ],
+    "post_test_mid": [
+      {
+        "title": "Buen trabajo",
+        "body": "Un {score}% en {topic} — vas por buen camino. Repasa las {incorrect_count} preguntas que fallaste y veras como subes rapidamente.",
+        "action": "Repasar fallos"
+      },
+      {
+        "title": "Progreso constante",
+        "body": "{correct_count} de {total_questions} correctas en {topic}. Cada intento te acerca mas. Revisa los errores y repite el test cuando estes lista.",
+        "action": "Ver tests"
+      }
+    ],
+    "post_test_low": [
+      {
+        "title": "No te desanimes",
+        "body": "Un {score}% en {topic} es un punto de partida. Revisa las explicaciones de cada pregunta y vuelve a intentarlo. La persistencia es tu mejor arma.",
+        "action": "Repasar tema"
+      },
+      {
+        "title": "A seguir intentando",
+        "body": "Este resultado en {topic} te muestra donde necesitas reforzar. Dedicale tiempo al repaso y veras como mejoras en el proximo intento.",
+        "action": "Test de refuerzo"
+      }
+    ]
+  }
+}

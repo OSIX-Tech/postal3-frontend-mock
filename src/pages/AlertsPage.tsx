@@ -1,5 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import {
   Flame,
   Bot,
@@ -18,6 +20,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { notification_service } from "@/services/notification-service";
 import { cn } from "@/lib/utils";
 import { MySpaceLayout } from "@/components/layout/MySpaceLayout";
+import { LOCALE_MAP } from "@/i18n/config";
+import type { SupportedLanguage } from "@/i18n/config";
 import type { AppNotification } from "@/types/notification";
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -41,7 +45,7 @@ const TYPE_COLORS: Record<AppNotification["type"], string> = {
   system: "bg-muted text-muted-foreground",
 };
 
-function format_relative_time(date_str: string): string {
+function format_relative_time(date_str: string, t: TFunction<'profile'>, locale: string): string {
   const now = new Date();
   const date = new Date(date_str);
   const diff_ms = now.getTime() - date.getTime();
@@ -49,14 +53,15 @@ function format_relative_time(date_str: string): string {
   const diff_hours = Math.floor(diff_minutes / 60);
   const diff_days = Math.floor(diff_hours / 24);
 
-  if (diff_minutes < 1) return "Ahora";
-  if (diff_minutes < 60) return `Hace ${diff_minutes}m`;
-  if (diff_hours < 24) return `Hace ${diff_hours}h`;
-  if (diff_days < 7) return `Hace ${diff_days}d`;
-  return date.toLocaleDateString("es-ES", { day: "numeric", month: "short" });
+  if (diff_minutes < 1) return t('alerts.time_now');
+  if (diff_minutes < 60) return t('alerts.time_minutes', { count: diff_minutes });
+  if (diff_hours < 24) return t('alerts.time_hours', { count: diff_hours });
+  if (diff_days < 7) return t('alerts.time_days', { count: diff_days });
+  return date.toLocaleDateString(locale, { day: "numeric", month: "short" });
 }
 
 export function AlertsPage() {
+  const { t, i18n } = useTranslation('profile');
   const query_client = useQueryClient();
   const navigate = useNavigate();
 
@@ -88,14 +93,16 @@ export function AlertsPage() {
     }
   };
 
+  const locale = LOCALE_MAP[i18n.language as SupportedLanguage] ?? 'es-ES';
+
   return (
-    <MySpaceLayout title="Alertas" description="Tus notificaciones recientes">
+    <MySpaceLayout title={t('alerts.title')} description={t('alerts.description')}>
       <div className="space-y-4">
         {/* Header actions */}
         {data && data.unread_count > 0 && (
           <div className="flex items-center justify-between">
             <p className="text-sm text-muted-foreground">
-              {data.unread_count} sin leer
+              {t('alerts.unread', { count: data.unread_count })}
             </p>
             <Button
               variant="ghost"
@@ -105,7 +112,7 @@ export function AlertsPage() {
               className="gap-1.5"
             >
               <CheckCheck className="h-4 w-4" />
-              Marcar todo como leído
+              {t('alerts.mark_all_read')}
             </Button>
           </div>
         )}
@@ -124,7 +131,7 @@ export function AlertsPage() {
               <Info className="h-8 w-8 text-muted-foreground" />
             </div>
             <p className="text-muted-foreground">
-              No tienes notificaciones
+              {t('alerts.empty')}
             </p>
           </div>
         )}
@@ -168,7 +175,7 @@ export function AlertsPage() {
                           {notification.title}
                         </p>
                         <span className="text-xs text-muted-foreground flex-shrink-0">
-                          {format_relative_time(notification.created_at)}
+                          {format_relative_time(notification.created_at, t, locale)}
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground mt-0.5 line-clamp-2">

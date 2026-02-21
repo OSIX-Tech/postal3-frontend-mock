@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Home, Mail, Phone, Facebook, Instagram } from 'lucide-react'
 
 interface FooterProps {
@@ -23,20 +24,21 @@ const DEFAULT_COMPANY = {
   phone: '+34 000 000 000',
 }
 
-const QUICK_LINKS = [
-  { href: '/about', label: 'Sobre nosotros' },
-  { href: '/privacy', label: 'Privacidad' },
-  { href: '/cookies', label: 'Cookies' },
-  { href: '/legal', label: 'Aviso legal' },
-]
-
 const SOCIAL_LINKS = [
   { href: 'https://facebook.com', icon: Facebook, label: 'Facebook' },
   { href: 'https://instagram.com', icon: Instagram, label: 'Instagram' },
 ]
 
 export function Footer({ company = DEFAULT_COMPANY }: FooterProps) {
+  const { t } = useTranslation()
   const current_year = new Date().getFullYear()
+
+  const QUICK_LINKS = [
+    { href: '/about', label: t('footer.about_us') },
+    { href: '/privacy', label: t('footer.privacy') },
+    { href: '/cookies', label: t('footer.cookies') },
+    { href: '/legal', label: t('footer.legal') },
+  ]
 
   return (
     <footer className="border-t-[3px] border-border/20 pt-8 mt-8">
@@ -45,12 +47,12 @@ export function Footer({ company = DEFAULT_COMPANY }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* About */}
           <div>
-            <h5 className="font-bold uppercase mb-4">Sobre nosotros</h5>
+            <h5 className="font-bold uppercase mb-4">{t('footer.about_us')}</h5>
             <p className="text-muted-foreground text-sm mb-4">
-              Propiedad de {company.name}
+              {t('footer.owned_by', { name: company.name })}
             </p>
             <p className="text-muted-foreground text-sm">
-              Síguenos en redes sociales:
+              {t('footer.follow_us')}
             </p>
           </div>
 
@@ -92,7 +94,7 @@ export function Footer({ company = DEFAULT_COMPANY }: FooterProps) {
 
           {/* Quick Links */}
           <div>
-            <h5 className="font-bold uppercase mb-4">Enlaces rápidos</h5>
+            <h5 className="font-bold uppercase mb-4">{t('footer.quick_links')}</h5>
             <ul className="space-y-2">
               {QUICK_LINKS.map((link) => (
                 <li key={link.href} className="border-b border-border/20 pb-2">

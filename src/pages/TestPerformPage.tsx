@@ -1,6 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+import { LOCALE_MAP } from "@/i18n/config";
+import type { SupportedLanguage } from "@/i18n/config";
 import {
   ChevronLeft,
   ChevronRight,
@@ -33,6 +36,7 @@ import { use_swipe } from "@/hooks/use-swipe";
 import { cn } from "@/lib/utils";
 
 export function TestPerformPage() {
+  const { t, i18n } = useTranslation('tests');
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const test_id = id ? Number(id) : 0;
@@ -190,7 +194,7 @@ export function TestPerformPage() {
         <div className="text-center">
           <Loader2 className="h-12 w-12 animate-spin text-violet-600 mx-auto" />
           <p className="mt-4 text-muted-foreground">
-            Preparando test...
+            {t('perform.loading')}
           </p>
         </div>
       </div>
@@ -204,14 +208,14 @@ export function TestPerformPage() {
         <div className="text-center">
           <AlertTriangle className="h-12 w-12 text-red-500 mx-auto" />
           <p className="mt-4 text-red-600 dark:text-red-400">
-            Error al cargar el test: {(error as Error)?.message}
+            {t('perform.error')} {(error as Error)?.message}
           </p>
           <Button
             variant="outline"
             className="mt-4"
             onClick={() => navigate("/tests")}
           >
-            Volver a tests
+            {t('perform.back')}
           </Button>
         </div>
       </div>
@@ -234,7 +238,7 @@ export function TestPerformPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium text-muted-foreground">
-                Pregunta
+                {t('perform.question')}
               </span>
               <span className="text-lg font-bold text-foreground">
                 {current_question_index + 1}
@@ -253,10 +257,10 @@ export function TestPerformPage() {
                   current_answer?.flagged_for_review &&
                     "bg-amber-500 hover:bg-amber-600 text-white"
                 )}
-                title="Marcar para revisar (F)"
+                title={t('perform.flag_tooltip')}
               >
                 <Flag className="h-4 w-4 mr-1" />
-                <span className="hidden sm:inline">Marcar</span>
+                <span className="hidden sm:inline">{t('perform.flag')}</span>
               </Button>
 
               <Button
@@ -264,7 +268,7 @@ export function TestPerformPage() {
                 size="sm"
                 onClick={() => set_show_shortcuts(!show_shortcuts)}
                 className="hidden md:flex"
-                title="Atajos de teclado"
+                title={t('perform.shortcuts_title')}
               >
                 <Keyboard className="h-4 w-4" />
               </Button>
@@ -283,24 +287,24 @@ export function TestPerformPage() {
           {show_shortcuts && (
             <div className="mt-4 p-4 bg-muted rounded-lg">
               <p className="text-sm font-medium text-foreground mb-2">
-                Atajos de teclado
+                {t('perform.shortcuts_title')}
               </p>
               <div className="grid grid-cols-2 gap-x-8 gap-y-1 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <kbd className="px-1.5 py-0.5 bg-card rounded border text-xs font-mono">1-4</kbd>
-                  Seleccionar respuesta
+                  {t('perform.shortcut_select')}
                 </div>
                 <div className="flex items-center gap-2">
                   <kbd className="px-1.5 py-0.5 bg-card rounded border text-xs font-mono">F</kbd>
-                  Marcar/desmarcar
+                  {t('perform.shortcut_flag')}
                 </div>
                 <div className="flex items-center gap-2">
                   <kbd className="px-1.5 py-0.5 bg-card rounded border text-xs font-mono">&larr; &rarr;</kbd>
-                  Navegar preguntas
+                  {t('perform.shortcut_navigate')}
                 </div>
                 <div className="flex items-center gap-2">
                   <kbd className="px-1.5 py-0.5 bg-card rounded border text-xs font-mono">Ctrl+Enter</kbd>
-                  Finalizar test
+                  {t('perform.shortcut_finish')}
                 </div>
               </div>
             </div>
@@ -340,15 +344,15 @@ export function TestPerformPage() {
               <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <span className="w-3 h-3 rounded bg-violet-100 dark:bg-violet-900/30" />
-                  Respondida
+                  {t('perform.nav_answered')}
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="w-3 h-3 rounded bg-background" />
-                  Sin responder
+                  {t('perform.nav_unanswered')}
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="w-3 h-3 rounded bg-amber-100 dark:bg-amber-900/30" />
-                  Marcada
+                  {t('perform.nav_flagged')}
                 </div>
               </div>
             </div>
@@ -390,16 +394,16 @@ export function TestPerformPage() {
             className="gap-1"
           >
             <ChevronLeft className="h-4 w-4" />
-            Anterior
+            {t('perform.prev')}
           </Button>
 
           {current_question_index === attempt.questions.length - 1 ? (
             <Button onClick={handle_finish} className="gap-1">
-              Finalizar test
+              {t('perform.finish')}
             </Button>
           ) : (
             <Button onClick={next_question} className="gap-1">
-              Siguiente
+              {t('perform.next')}
               <ChevronRight className="h-4 w-4" />
             </Button>
           )}
@@ -426,17 +430,17 @@ export function TestPerformPage() {
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2">
               <RotateCcw className="h-5 w-5 text-violet-600" />
-              Test en progreso encontrado
+              {t('perform.recovery_title')}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Tienes un intento guardado de este test
+              {t('perform.recovery_description')}
               {recovery.saved_at && (
                 <span className="block mt-1 text-muted-foreground">
-                  Guardado: {new Date(recovery.saved_at).toLocaleString("es-ES")}
+                  {t('perform.recovery_saved_at', { date: new Date(recovery.saved_at).toLocaleString(LOCALE_MAP[i18n.language as SupportedLanguage] ?? 'es-ES') })}
                 </span>
               )}
               <span className="block mt-2">
-                ¿Quieres continuar donde lo dejaste o empezar de nuevo?
+                {t('perform.recovery_question')}
               </span>
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -447,7 +451,7 @@ export function TestPerformPage() {
                 set_show_recovery_dialog(false);
               }}
             >
-              Empezar de nuevo
+              {t('perform.recovery_restart')}
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
@@ -455,7 +459,7 @@ export function TestPerformPage() {
                 set_show_recovery_dialog(false);
               }}
             >
-              Continuar
+              {t('perform.recovery_continue')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -468,24 +472,23 @@ export function TestPerformPage() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Finalizar el test?</AlertDialogTitle>
+            <AlertDialogTitle>{t('perform.finish_title')}</AlertDialogTitle>
             <AlertDialogDescription>
-              Has respondido {progress.answered} de {progress.total} preguntas.
+              {t('perform.finish_answered', { answered: progress.answered, total: progress.total })}
               {progress.answered < progress.total && (
                 <span className="block mt-2 text-amber-600 dark:text-amber-400">
-                  Aún tienes {progress.total - progress.answered} preguntas sin
-                  responder.
+                  {t('perform.finish_unanswered', { unanswered: progress.total - progress.answered })}
                 </span>
               )}
               {progress.flagged > 0 && (
                 <span className="block mt-1 text-amber-600 dark:text-amber-400">
-                  Tienes {progress.flagged} preguntas marcadas para revisar.
+                  {t('perform.finish_flagged', { flagged: progress.flagged })}
                 </span>
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Continuar test</AlertDialogCancel>
+            <AlertDialogCancel>{t('perform.finish_cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={confirm_finish}
               disabled={finish_mutation.isPending}
@@ -493,7 +496,7 @@ export function TestPerformPage() {
               {finish_mutation.isPending ? (
                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
               ) : null}
-              Finalizar
+              {t('perform.finish_confirm')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -505,18 +508,16 @@ export function TestPerformPage() {
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2 text-red-600">
               <AlertTriangle className="h-5 w-5" />
-              ¡Se acabó el tiempo!
+              {t('perform.time_up_title')}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              El tiempo disponible para el test ha terminado. Puedes finalizar
-              ahora o continuar respondiendo (el tiempo extra quedará
-              registrado).
+              {t('perform.time_up_description')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Continuar</AlertDialogCancel>
+            <AlertDialogCancel>{t('perform.time_up_continue')}</AlertDialogCancel>
             <AlertDialogAction onClick={confirm_finish}>
-              Finalizar ahora
+              {t('perform.time_up_finish')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -3,24 +3,26 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Link } from "react-router-dom";
 import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 
-const reset_password_schema = z
-  .object({
-    password: z.string().min(8, "Mínimo 8 caracteres"),
+function create_reset_password_schema(t: TFunction<'auth'>) {
+  return z.object({
+    password: z.string().min(8, t('validation.min_8_chars')),
     confirm_password: z.string(),
-  })
-  .refine((data) => data.password === data.confirm_password, {
-    message: "Las contraseñas no coinciden",
-    path: ["confirm_password"],
+  }).refine((data) => data.password === data.confirm_password, {
+    message: t('validation.passwords_no_match'),
+    path: ['confirm_password'],
   });
+}
 
-type ResetPasswordFormData = z.infer<typeof reset_password_schema>;
+type ResetPasswordFormData = z.infer<ReturnType<typeof create_reset_password_schema>>;
 
 interface ResetPasswordFormProps {
   on_submit: (password: string) => Promise<void>;
@@ -33,8 +35,10 @@ export function ResetPasswordForm({
   is_loading,
   error,
 }: ResetPasswordFormProps) {
+  const { t } = useTranslation('auth');
   const [show_password, set_show_password] = useState(false);
   const [show_confirm, set_show_confirm] = useState(false);
+  const reset_password_schema = useMemo(() => create_reset_password_schema(t), [t]);
 
   const {
     register,
@@ -56,7 +60,7 @@ export function ResetPasswordForm({
     <form onSubmit={handleSubmit(handle_submit)} className="space-y-5">
       <div className="space-y-2 text-center">
         <p className="text-sm text-muted-foreground">
-          Introduce tu nueva contraseña. Debe tener al menos 8 caracteres.
+          {t('reset_password.description')}
         </p>
       </div>
 
@@ -67,7 +71,7 @@ export function ResetPasswordForm({
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="password">Nueva contraseña</Label>
+        <Label htmlFor="password">{t('reset_password.password_label')}</Label>
         <div className="relative">
           <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -97,7 +101,7 @@ export function ResetPasswordForm({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="confirm_password">Confirmar contraseña</Label>
+        <Label htmlFor="confirm_password">{t('reset_password.confirm_password_label')}</Label>
         <div className="relative">
           <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -135,17 +139,17 @@ export function ResetPasswordForm({
         {is_loading ? (
           <>
             <Spinner size="sm" className="border-white/30 border-t-white" />
-            Guardando...
+            {t('reset_password.submit_loading')}
           </>
         ) : (
-          "Restablecer contraseña"
+          t('reset_password.submit')
         )}
       </Button>
 
       <Button asChild variant="ghost" className="w-full">
         <Link to="/login">
           <ArrowLeft className="h-4 w-4" />
-          Volver al inicio de sesión
+          {t('reset_password.back_to_login')}
         </Link>
       </Button>
     </form>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MySpaceLayout } from "@/components/layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -11,6 +12,7 @@ import { use_my_profile } from "@/hooks/use-profile";
 import { LoadingState, ErrorState } from "@/components/feedback";
 
 export function MyProfilePage() {
+  const { t } = useTranslation('profile');
   const {
     profile,
     is_loading,
@@ -22,17 +24,17 @@ export function MyProfilePage() {
 
   if (is_loading) {
     return (
-      <MySpaceLayout title="Mi cuenta">
-        <LoadingState text="Cargando perfil..." />
+      <MySpaceLayout title={t('my_account.title')}>
+        <LoadingState text={t('my_account.loading')} />
       </MySpaceLayout>
     );
   }
 
   if (is_error || !profile) {
     return (
-      <MySpaceLayout title="Mi cuenta">
+      <MySpaceLayout title={t('my_account.title')}>
         <ErrorState
-          description="No se pudo cargar el perfil"
+          description={t('my_account.error')}
           on_retry={() => window.location.reload()}
         />
       </MySpaceLayout>
@@ -40,7 +42,7 @@ export function MyProfilePage() {
   }
 
   return (
-    <MySpaceLayout title="Mi cuenta">
+    <MySpaceLayout title={t('my_account.title')}>
       <div className="space-y-8">
         <ProfileHeader
           name={profile.name}
@@ -57,10 +59,10 @@ export function MyProfilePage() {
         <Tabs defaultValue="badges">
           <TabsList className="w-full">
             <TabsTrigger value="badges" className="flex-1">
-              Insignias ({profile.badges.length})
+              {t('my_account.badges')} ({profile.badges.length})
             </TabsTrigger>
             <TabsTrigger value="stats" className="flex-1">
-              Estadísticas
+              {t('my_account.statistics')}
             </TabsTrigger>
           </TabsList>
 

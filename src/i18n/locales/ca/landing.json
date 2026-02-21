@@ -1,0 +1,185 @@
+{
+  "hero": {
+    "badge": "Oposicions amb gamificació",
+    "title_line1": "Deixa d'estudiar",
+    "title_line2": "a cegues.",
+    "description": "12.000 preguntes oficials. Analítica per tema. Ratxes diàries. Lligues competitives. Un sistema dissenyat perquè",
+    "description_highlight": "aprovis la teva oposició",
+    "cta_primary": "Començar ara",
+    "cta_secondary": "Ja tinc compte",
+    "check_questions": "12.000+ preguntes oficials",
+    "check_analytics": "Analítica per tema",
+    "check_streaks": "Ratxes i lligues",
+    "hero_alt": "Preparació d'oposicions amb Postal3"
+  },
+  "metrics": {
+    "questions_value": "12.847",
+    "questions_label": "Preguntes oficials",
+    "users_value": "2.400+",
+    "users_label": "Opositores actives",
+    "pass_rate_value": "85%",
+    "pass_rate_label": "Taxa d'aprovats",
+    "satisfaction_value": "4,8★",
+    "satisfaction_label": "Satisfacció mitjana"
+  },
+  "features": {
+    "section_label": "Funcionalitats",
+    "title_line1": "Dissenyat perquè aprovis,",
+    "title_line2": "no perquè estudiïs més.",
+    "tests_title": "Tests oficials per temes",
+    "tests_description": "Preguntes reals de convocatòries anteriors, organitzades per matèria i dificultat. Practica exactament el que entra al teu examen.",
+    "tests_tags": ["Constitució", "Llei 39/2015", "EBEP", "Llei 40/2015", "Procediment"],
+    "elo_title": "Sistema ELO",
+    "elo_description": "Rating objectiu que reflecteix el teu nivell real amb cada test que completes.",
+    "streaks_title": "Ratxes diàries",
+    "streaks_description": "Mantén l'hàbit amb ratxes, fites i recompenses que et premien per la constància.",
+    "analytics_title": "Analítica detallada",
+    "analytics_description": "Identifica temes febles. Mesura el teu progrés. Optimitza el teu pla d'estudi amb dades reals.",
+    "leagues_title": "Lligues setmanals",
+    "leagues_description": "Competeix amb opositores del teu nivell. Ascendeix de lliga cada setmana demostrant constància."
+  },
+  "how_it_works": {
+    "section_label": "Com funciona",
+    "title": "De zero a estudiar en 2 minuts",
+    "step1_title": "Tria la teva oposició",
+    "step1_description": "Auxiliar, Administratiu, Tramitació, Auxili Judicial o Correus. Selecciona i comencem.",
+    "step2_title": "Fes tests cada dia",
+    "step2_description": "Preguntes d'exàmens reals. Respostes explicades. Marca les difícils per repassar.",
+    "step3_title": "Mesura i competeix",
+    "step3_description": "Analítica per tema, rating ELO, lligues setmanals. Sabràs exactament on ets."
+  },
+  "testimonials": {
+    "section_label": "Testimonis",
+    "title": "El que diuen les nostres opositores",
+    "featured_text": "Les ratxes m'han canviat la manera d'estudiar. Abans deixava de preparar als pocs dies. Ara porto 45 dies seguits sense fallar. L'analítica em va mostrar que fallava sempre en Procediment Administratiu — vaig enfocar-hi el repàs i vaig pujar un 20% en un mes.",
+    "featured_name": "Laura Martínez",
+    "featured_role": "Auxiliar Administratiu — va aprovar el 2025",
+    "testimonial1_text": "El sistema de lligues em motiva moltíssim. Competir amb altres opositores fa que estudiar sigui molt menys avorrit. He pujat a Oro en 3 setmanes.",
+    "testimonial1_name": "Carmen Rodríguez",
+    "testimonial1_role": "Tramitació Processal",
+    "testimonial2_text": "La clau per a mi va ser l'analítica. Vaig descobrir que fallava sempre els mateixos temes. Vaig enfocar el repàs i vaig aprovar a la primera convocatòria.",
+    "testimonial2_name": "Ana García",
+    "testimonial2_role": "Administratiu de l'Estat"
+  },
+  "faq": {
+    "section_label": "FAQ",
+    "title_line1": "Preguntes",
+    "title_line2": "freqüents",
+    "contact_text": "Si tens algun altre dubte, escriu-nos a",
+    "q1": "Quant costa?",
+    "a1": "Consulta els plans disponibles al nostre web. Oferim diferents opcions perquè triïs la que millor s'adapti a tu.",
+    "q2": "Quines oposicions estan disponibles?",
+    "a2": "Auxiliar Administratiu de l'Estat, Administratiu de l'Estat, Tramitació Processal, Auxili Judicial i Correus i Telègrafs.",
+    "q3": "Les preguntes són d'exàmens reals?",
+    "a3": "Sí. El banc de preguntes està format per preguntes de convocatòries oficials anteriors, revisades i actualitzades pel nostre equip.",
+    "q4": "Com funciona el sistema de lligues?",
+    "a4": "Cada setmana competeixes amb opositores del teu nivell. Les millors ascendeixen (Bronce → Plata → Oro → Diamante) i les que menys practiquen descendeixen.",
+    "q5": "Funciona al mòbil?",
+    "a5": "Sí. La plataforma és 100% responsive i funciona en qualsevol dispositiu amb navegador web."
+  },
+  "cta": {
+    "title": "La teva plaça t'està esperant.",
+    "description": "Cada dia que no estudies és un dia que t'allunya del teu objectiu. Comença ara i uneix-te a milers d'opositores que ja confien en Postal3.",
+    "register": "Crear compte",
+    "login": "Accedir al meu compte"
+  },
+  "dashboard": {
+    "oposicion": "Auxiliar Administratiu de l'Estat",
+    "greeting": "Hola, {{name}}",
+    "streak_days": "{{days}} dies",
+    "streak_info_prefix": "Portes ",
+    "streak_info_middle": " de ratxa i una precisió del ",
+    "streak_info_suffix": ".",
+    "keep_going": "Continua així.",
+    "start_test": "Començar test",
+    "available_tests": "Tests disponibles",
+    "view_all": "Veure tots",
+    "review": "Repassar",
+    "questions_count": "{{count}} preguntes",
+    "recent_results": "Últims resultats",
+    "today": "Avui",
+    "yesterday": "Ahir",
+    "league_name": "Lliga Plata",
+    "league_points_needed": "{{points}} pts per a Lliga Oro",
+    "stats_tests": "Tests",
+    "stats_streak": "Ratxa",
+    "stats_accuracy": "Precisió"
+  },
+  "coach": {
+    "app_entry": [
+      {
+        "title": "Benvinguda de nou",
+        "body": "Hola {user_name}, la constancia es la clau de l'exit. Dedica encara que sigui 15 minuts avui a repassar els teus temes pendents.",
+        "action": "Començar test"
+      },
+      {
+        "title": "Un dia mes, un pas mes",
+        "body": "Cada sessio d'estudi t'acosta a la teva placa, {user_name}. Avui es un bon dia per superar els teus limits.",
+        "action": "Veure tests"
+      },
+      {
+        "title": "El teu coach et saluda",
+        "body": "Hola {user_name}, recorda que la preparacio diaria marca la diferencia entre aprovar i quedar-se a prop. Anem-hi.",
+        "action": "Anar a practicar"
+      }
+    ],
+    "auto_test": [
+      {
+        "title": "Test personalitzat llest",
+        "body": "He generat un test de {test_count} preguntes sobre {topic} basat en les teves arees de millora. Practicar el dificil es el que realment et prepara.",
+        "action": "Fer test"
+      },
+      {
+        "title": "Repas intel·ligent",
+        "body": "Tens un nou test de {topic} amb {test_count} preguntes seleccionades per reforcar els teus punts febles.",
+        "action": "Començar ara"
+      }
+    ],
+    "daily_limit": [
+      {
+        "title": "Limit diari assolit",
+        "body": "Has arribat a {points} punts avui. Descansar tambe es part de l'estudi. Torna dema amb la ment fresca."
+      },
+      {
+        "title": "Gran sessio d'estudi",
+        "body": "Increible esforc avui, {user_name}. Has assolit el limit de {points} punts. El teu cervell necessita processar tot el que has apres, ens veiem dema."
+      }
+    ],
+    "post_test_high": [
+      {
+        "title": "Resultat excel·lent",
+        "body": "Un {score}% en {topic} — {correct_count} de {total_questions} correctes. Estas demostrant un domini solid. Continua aixi i la placa es teva.",
+        "action": "Seguir practicant"
+      },
+      {
+        "title": "Fantastic, {user_name}",
+        "body": "Has aconseguit un {score}% en {topic}. Aquest nivell de preparacio es el que marca la diferencia a l'examen real.",
+        "action": "Un altre test"
+      }
+    ],
+    "post_test_mid": [
+      {
+        "title": "Bon treball",
+        "body": "Un {score}% en {topic} — vas per bon cami. Repassa les {incorrect_count} preguntes que has fallat i veuras com puges rapidament.",
+        "action": "Repassar errors"
+      },
+      {
+        "title": "Progres constant",
+        "body": "{correct_count} de {total_questions} correctes en {topic}. Cada intent t'acosta mes. Revisa els errors i repeteix el test quan estiguis llesta.",
+        "action": "Veure tests"
+      }
+    ],
+    "post_test_low": [
+      {
+        "title": "No et desanimis",
+        "body": "Un {score}% en {topic} es un punt de partida. Revisa les explicacions de cada pregunta i torna-ho a intentar. La persistencia es la teva millor arma.",
+        "action": "Repassar tema"
+      },
+      {
+        "title": "A seguir intentant-ho",
+        "body": "Aquest resultat en {topic} et mostra on necessites reforcar. Dedica-li temps al repas i veuras com millores al proxim intent.",
+        "action": "Test de reforc"
+      }
+    ]
+  }
+}
